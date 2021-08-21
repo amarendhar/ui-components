@@ -1,39 +1,43 @@
 export const colors = {
   white: {
-    '100': '#ffffff',
-    '80': '#ecedef',
+    100: '#ffffff',
+    80: '#ecedef',
   },
   blue: {
-    '100': '#115293',
-    '80': '#1976d2',
+    100: '#115293',
+    80: '#1976d2',
   },
   green: {
-    '100': '#367f39',
-    '80': '#4caf50',
+    100: '#367f39',
+    80: '#4caf50',
   },
   orange: {
-    '100': '#cb7d09',
-    '80': '#ff9800',
+    100: '#cb7d09',
+    80: '#ff9800',
   },
   red: {
-    '100': '#9a0036',
-    '80': '#dc004e',
+    100: '#9a0036',
+    80: '#dc004e',
   },
   grey: {
-    '100': '#808080',
-    '80': '#969494',
+    100: '#808080',
+    80: '#969494',
   },
   silver: {
-    '100': '#c5c2c2',
-    '80': '#e0e0e0',
-    '60': '#efefef',
+    100: '#c5c2c2',
+    80: '#e0e0e0',
+    60: '#efefef',
   },
   black: {
-    '100': '#000000',
-    '80': '#484848',
+    100: '#000000',
+    80: '#484848',
   },
   yellow: {
-    '100': '#F8E831',
+    100: '#F8E831',
+  },
+  outline: {
+    100: '#e0e0e0',
+    80: 'transparent',
   },
 }
 
@@ -84,32 +88,62 @@ export const defaultTheme = {
   colors,
   default: {
     bg: colors.silver,
+    border: colors.silver,
     text: colors.black,
-    outlineBg: colors.black,
+    outline: {
+      bg: colors.outline,
+      border: colors.black,
+      text: colors.black,
+    },
   },
   primary: {
     bg: colors.blue,
+    border: colors.blue,
     text: colors.white,
-    outlineBg: colors.blue,
+    outline: {
+      bg: colors.outline,
+      border: colors.blue,
+      text: colors.blue,
+    },
   },
   success: {
     bg: colors.green,
+    border: colors.green,
     text: colors.white,
-    outlineBg: colors.green,
+    outline: {
+      bg: colors.outline,
+      border: colors.green,
+      text: colors.green,
+    },
   },
   warning: {
     bg: colors.orange,
+    border: colors.orange,
     text: colors.white,
-    outlineBg: colors.orange,
+    outline: {
+      bg: colors.outline,
+      border: colors.orange,
+      text: colors.orange,
+    },
   },
   danger: {
     bg: colors.red,
+    border: colors.red,
     text: colors.white,
-    outlineBg: colors.red,
+    outline: {
+      bg: colors.outline,
+      border: colors.red,
+      text: colors.red,
+    },
   },
   disabled: {
     bg: colors.silver,
+    border: colors.silver,
     text: colors.black,
-    outlineBg: colors.silver,
+    outline: {
+      bg: colors.outline,
+      border: colors.silver,
+      text: colors.black,
+    },
   },
 }

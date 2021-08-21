@@ -1,6 +1,6 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Flex } from 'rebass'
+import { Flex, Text } from 'rebass'
 import { Button, ButtonVariants, ButtonSizes } from './index'
 
 export default {
@@ -18,6 +18,14 @@ export default {
 const Template: ComponentStory<typeof Button> = (args) => {
   return (
     <>
+      <Text
+        sx={{
+          fontWeight: 'bold',
+          marginBottom: '10px',
+        }}
+      >
+        Contained
+      </Text>
       <Flex
         mb={10}
         alignItems="center"
@@ -29,6 +37,15 @@ const Template: ComponentStory<typeof Button> = (args) => {
         <Button {...args} size={ButtonSizes.medium} />
         <Button {...args} size={ButtonSizes.large} />
       </Flex>
+
+      <Text
+        sx={{
+          fontWeight: 'bold',
+          marginBottom: '10px',
+        }}
+      >
+        Outlined
+      </Text>
       <Flex
         mb={10}
         alignItems="center"
