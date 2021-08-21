@@ -5,6 +5,7 @@ import { defaultTheme } from '../src/themes/default'
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
+    font-family: arial;
   }
 `;
 

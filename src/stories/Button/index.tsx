@@ -1,23 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
-/**
- * Variants referenced from react-bootstrap
- *  https://react-bootstrap.github.io/components/buttons/
- */
-export enum ButtonVariants {
-  default = 'default',
-  primary = 'primary',
-  success = 'success',
-  warning = 'warning',
-  danger = 'danger',
-}
-
-export enum ButtonSizes {
-  small = 'small',
-  medium = 'medium',
-  large = 'large',
-}
+import { CommonVariants, CommonSizes } from 'types'
 
 type ButtonProps = {
   'data-testid'?: string
@@ -25,8 +8,8 @@ type ButtonProps = {
   onClick?: () => void
   disabled?: boolean
   children: React.ReactNode
-  variant?: ButtonVariants
-  size?: ButtonSizes
+  variant?: CommonVariants
+  size?: CommonSizes
   outlined?: boolean
 }
 
@@ -35,8 +18,8 @@ export const Button = ({
   onClick = () => {},
   disabled = false,
   children,
-  variant = ButtonVariants.default,
-  size = ButtonSizes.medium,
+  variant = CommonVariants.default,
+  size = CommonSizes.medium,
   outlined = false,
   ...restProps
 }: ButtonProps) => {
@@ -54,6 +37,8 @@ export const Button = ({
     </ButtonContainer>
   )
 }
+
+export default Button
 
 const ButtonContainer = styled.button<{
   variant: string

@@ -1,3 +1,5 @@
+import { ObjType } from 'types'
+
 export const colors = {
   white: {
     100: '#ffffff',
@@ -65,7 +67,7 @@ export const breakpoints = {
   lg: 992, // Laptops (>= 13 inch) -> ">= 992"
 }
 
-export const mediaQuery = {
+export const mediaQuery: ObjType = {
   sm: `@media (max-width: ${breakpoints.sm}px)`, // Phones "<=767 OR < 768"
   md: `@media (min-width: ${breakpoints.md}px)`, // Tablets ">= 768"
   lg: `@media (min-width: ${breakpoints.lg}px)`, // Laptops ">= 992"
@@ -80,7 +82,12 @@ export const mediaQuery = {
 }
 
 export const defaultTheme = {
-  breakpoints,
+  /**
+   * Do not include custom-breakpoints like below,
+   *  to avoid conflicts against breakpoints from styled-system npm,
+   *  otherwise styled-system will throw error, and will not render UI in storybook.
+   */
+  // breakpoints,
   mediaQuery,
   space,
   fontSize,

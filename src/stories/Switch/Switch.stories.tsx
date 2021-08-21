@@ -1,22 +1,15 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Flex, Text } from 'rebass'
-import { Button } from './index'
+import { SwitchBox } from './index'
 import { CommonVariants, CommonSizes } from 'types'
 
 export default {
-  title: 'Components/Button',
-  component: Button,
-  argTypes: {
-    // disabled: { control: 'boolean' },
-    // variant: {
-    //   control: { type: 'radio' },
-    //   options: Object.keys(CommonVariants),
-    // }
-  },
-} as ComponentMeta<typeof Button>
+  title: 'Components/SwitchBox',
+  component: SwitchBox,
+} as ComponentMeta<typeof SwitchBox>
 
-const Template: ComponentStory<typeof Button> = (args) => {
+const Template: ComponentStory<typeof SwitchBox> = (args) => {
   return (
     <>
       <Text
@@ -31,32 +24,23 @@ const Template: ComponentStory<typeof Button> = (args) => {
         mb={10}
         alignItems="center"
         sx={{
-          gap: 10,
+          gap: 50,
         }}
       >
-        <Button {...args} size={CommonSizes.small} />
-        <Button {...args} size={CommonSizes.medium} />
-        <Button {...args} size={CommonSizes.large} />
+        <SwitchBox {...args} size={CommonSizes.small} />
+        <SwitchBox {...args} size={CommonSizes.medium} />
+        <SwitchBox {...args} size={CommonSizes.large} />
       </Flex>
-
-      <Text
-        sx={{
-          fontWeight: 'bold',
-          marginBottom: '10px',
-        }}
-      >
-        Outlined
-      </Text>
       <Flex
         mb={10}
         alignItems="center"
         sx={{
-          gap: 10,
+          gap: 50,
         }}
       >
-        <Button {...args} size={CommonSizes.small} outlined />
-        <Button {...args} size={CommonSizes.medium} outlined />
-        <Button {...args} size={CommonSizes.large} outlined />
+        <SwitchBox {...args} size={CommonSizes.small} value />
+        <SwitchBox {...args} size={CommonSizes.medium} value />
+        <SwitchBox {...args} size={CommonSizes.large} value />
       </Flex>
     </>
   )
