@@ -30,7 +30,7 @@ type ButtonProps = {
   outlined?: boolean
 }
 
-const Button = ({
+export const Button = ({
   className = '',
   onClick = () => {},
   disabled = false,
@@ -54,8 +54,6 @@ const Button = ({
     </ButtonContainer>
   )
 }
-
-export default Button;
 
 const ButtonContainer = styled.button<{ variant: string; size: string; outlined: boolean; }>`
   position: relative;

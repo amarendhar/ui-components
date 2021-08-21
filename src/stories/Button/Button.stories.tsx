@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Button, { ButtonVariants, ButtonSizes } from './index';
+import { Button, ButtonVariants, ButtonSizes } from './index';
 
 export default {
   title: 'Components/Button',
