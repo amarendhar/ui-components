@@ -1,7 +1,7 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from 'react'
+import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Box } from 'rebass'
-import { Button, ButtonVariants, ButtonSizes } from './index';
+import { Button, ButtonVariants, ButtonSizes } from './index'
 
 export default {
   title: 'Components/Button',
@@ -13,7 +13,7 @@ export default {
     //   options: Object.keys(ButtonVariants),
     // }
   },
-} as ComponentMeta<typeof Button>;
+} as ComponentMeta<typeof Button>
 
 const Template: ComponentStory<typeof Button> = (args) => {
   return (
@@ -30,41 +30,41 @@ const Template: ComponentStory<typeof Button> = (args) => {
       </Box>
     </>
   )
-};
+}
 
-export const Default = Template.bind({});
+export const Default = Template.bind({})
 Default.args = {
   variant: ButtonVariants.default,
-  children: 'Default'
-};
+  children: 'Default',
+}
 
-export const Primary = Template.bind({});
+export const Primary = Template.bind({})
 Primary.args = {
   variant: ButtonVariants.primary,
-  children: 'Primary'
-};
+  children: 'Primary',
+}
 
-export const Success = Template.bind({});
+export const Success = Template.bind({})
 Success.args = {
   variant: ButtonVariants.success,
-  children: 'Success'
-};
+  children: 'Success',
+}
 
-export const Warning = Template.bind({});
+export const Warning = Template.bind({})
 Warning.args = {
   variant: ButtonVariants.warning,
-  children: 'Warning'
-};
+  children: 'Warning',
+}
 
-export const Danger = Template.bind({});
+export const Danger = Template.bind({})
 Danger.args = {
   variant: ButtonVariants.danger,
-  children: 'Danger'
-};
+  children: 'Danger',
+}
 
-export const Disabled = Template.bind({});
+export const Disabled = Template.bind({})
 Disabled.args = {
   variant: ButtonVariants.danger,
   disabled: true,
-  children: 'Disabled'
-};
+  children: 'Disabled',
+}

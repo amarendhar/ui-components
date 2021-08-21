@@ -55,7 +55,11 @@ export const Button = ({
   )
 }
 
-const ButtonContainer = styled.button<{ variant: string; size: string; outlined: boolean; }>`
+const ButtonContainer = styled.button<{
+  variant: string
+  size: string
+  outlined: boolean
+}>`
   position: relative;
   box-sizing: border-box;
   cursor: pointer;
@@ -64,10 +68,14 @@ const ButtonContainer = styled.button<{ variant: string; size: string; outlined:
   user-select: none;
   transition: all 300ms ease 0s;
 
-  ${({ theme, variant, size,  outlined }) => `
-    ${outlined ? `
+  ${({ theme, variant, size, outlined }) => `
+    ${
+      outlined
+        ? `
       border-radius: ${theme.space.small}px;
-      padding: ${theme.paddingFactor[size]}px ${theme.paddingFactor[size] * 3 - 2}px;
+      padding: ${theme.paddingFactor[size]}px ${
+            theme.paddingFactor[size] * 3 - 2
+          }px;
       font-size: ${theme.fontSize[size]}px;
       background-color: transparent;
       border: 1px solid ${theme[variant]['outlineBg'][80]};
@@ -91,9 +99,12 @@ const ButtonContainer = styled.button<{ variant: string; size: string; outlined:
         box-shadow: none;
         cursor: not-allowed;
       }
-    `:`
+    `
+        : `
       border-radius: ${theme.space.small}px;
-      padding: ${theme.paddingFactor[size]}px ${theme.paddingFactor[size] * 3 - 2}px;
+      padding: ${theme.paddingFactor[size]}px ${
+            theme.paddingFactor[size] * 3 - 2
+          }px;
       font-size: ${theme.fontSize[size]}px;
       background-color: ${theme[variant]['bg'][80]};
       border: 1px solid ${theme[variant]['bg'][80]};
@@ -116,6 +127,7 @@ const ButtonContainer = styled.button<{ variant: string; size: string; outlined:
         box-shadow: none;
         cursor: not-allowed;
       }
-    `}
+    `
+    }
   `}
 `
