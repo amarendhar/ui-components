@@ -11,7 +11,7 @@ export const isUndefined = (value: any): boolean => typeOf(value, 'undefined')
 export const isNumber = (value: any): boolean => typeOf(value, 'number')
 export const isString = (value: any): boolean => typeOf(value, 'string')
 export const isArray = (value: any): boolean => typeOf(value, 'array')
-export const isObject = (value: any): boolean => typeOf(value, 'object')
+export const isObject = (value: any): boolean => typeOf(value, 'object object')
 
 export const getMediaQuery = (query: string) =>
   mediaQuery[query].replace('@media', '')

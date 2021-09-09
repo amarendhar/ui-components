@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { variant } from 'styled-system'
+import { variants } from 'themes/themeUtils'
 import { CommonVariants, CommonSizes } from 'types'
 import { createClassName } from 'utils/helpers'
 
@@ -38,11 +38,14 @@ export const SwitchBox = ({
       data-testid={restProps['data-testid']}
       className={`container ${className}`}
       onClick={() => {
-        !disabled &&
-          toggleChecked((v) => {
-            onChange(!v)
-            return !v
-          })
+        if (disabled) {
+          return
+        }
+
+        toggleChecked((v) => {
+          onChange(!v)
+          return !v
+        })
       }}
       disabled={disabled}
     >
@@ -79,9 +82,8 @@ const Container = styled.div<{ disabled: boolean }>`
   }
 `
 
-const sizeVariants = variant({
-  prop: 'size',
-  variants: {
+const sizeVariants = variants({
+  size: {
     small: {
       width: 28,
       height: 14,
@@ -144,9 +146,8 @@ const SwitchContainer = styled.span<{
   }}
 `
 
-const transformVariants = variant({
-  prop: 'size',
-  variants: {
+const transformVariants = variants({
+  size: {
     small: {
       width: 10,
       height: 10,
