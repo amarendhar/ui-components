@@ -136,7 +136,6 @@ const getColorStates = (color: any) => {
   }
 }
 
-
 /**
  * Refer `paletteOutput` object from @material-ui/core/styles/createPalette.js
  */

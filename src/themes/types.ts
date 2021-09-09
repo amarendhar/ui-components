@@ -31,12 +31,16 @@ export type ColorPartial = Partial<Color>
 
 export type PaletteColorOptions = SimplePaletteColorOptions | ColorPartial
 
-export interface SimplePaletteColorOptions {
-  light?: string
-  main: string
-  dark?: string
-  contrastText?: string
-}
+// Note: Material-UI type of 'SimplePaletteColorOptions'
+// export interface SimplePaletteColorOptions {
+//   light?: string
+//   main: string
+//   dark?: string
+//   contrastText?: string
+// }
+
+// Note: ui-library type of 'SimplePaletteColorOptions'
+export type SimplePaletteColorOptions = string
 
 export interface PaletteColor {
   light: string

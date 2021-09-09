@@ -90,6 +90,47 @@ describe('createPalette', () => {
     },
   }
 
+  const primaryOrangeAndSecondaryBluePalette = {
+    ...commonPalette,
+    error: {
+      contrastText: '#fff',
+      dark: 'rgb(147, 32, 32)',
+      light: 'rgb(219, 88, 88)',
+      main: '#d32f2f',
+    },
+    info: {
+      contrastText: '#fff',
+      dark: 'rgb(1, 95, 146)',
+      light: 'rgb(52, 159, 218)',
+      main: '#0288d1',
+    },
+    mode: 'light',
+    primary: {
+      contrastText: '#fff',
+      dark: 'rgb(161, 56, 0)',
+      light: 'rgb(235, 115, 51)',
+      main: '#e65100',
+    },
+    secondary: {
+      contrastText: '#fff',
+      dark: 'rgb(23, 105, 170)',
+      light: 'rgb(77, 171, 245)',
+      main: '#2196f3',
+    },
+    success: {
+      contrastText: '#fff',
+      dark: 'rgb(32, 87, 35)',
+      light: 'rgb(87, 151, 91)',
+      main: '#2e7d32',
+    },
+    warning: {
+      contrastText: '#fff',
+      dark: 'rgb(165, 75, 1)',
+      light: 'rgb(240, 137, 52)',
+      main: '#ED6C02',
+    },
+  }
+
   it('Should return palette for light-mode', () => {
     expect(createPalette()).toEqual({
       ...lightPalette,
@@ -106,5 +147,21 @@ describe('createPalette', () => {
       ...darkPalette,
       mode: PALETTE_MODE.DARK,
     })
+  })
+
+  /**
+   * For Color codes refer 
+   *  https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=FF9800&secondary.color=2196F3
+   * 
+   * where '#e65100' is orange[500]
+   * where '#2196f3' is blue[500]
+   */
+  it('Should return palette for primary-orange & secondary-blue', () => {
+    expect(
+      createPalette({
+        primary: '#e65100',
+        secondary: '#2196f3',
+      })
+    ).toEqual(primaryOrangeAndSecondaryBluePalette)
   })
 })
