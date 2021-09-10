@@ -1,4 +1,4 @@
-import { PaletteOptions } from 'themes/types'
+import { PaletteColor, PaletteOptions } from 'themes/types'
 import colors from '../colors'
 import {
   decomposeColor,
@@ -92,7 +92,7 @@ export const dark = {
 /**
  * Refer `getContrastText` method from @material-ui/core/styles/createPalette.js
  */
-const getContrastText = (background: any) => {
+const getContrastText = (background: string) => {
   const contrastText =
     getContrastRatio(background, dark.text.primary) >= contrastThreshold
       ? dark.text.primary
@@ -118,7 +118,7 @@ const getContrastText = (background: any) => {
 /**
  * Refer `augmentColor` method from @material-ui/core/styles/createPalette.js
  */
-const getColorStates = (color: any) => {
+const getColorStates = (color: string): PaletteColor => {
   // Note: Do not use common variable like below, it's not giving correct 'dark' value, when used common variable like that.
   // const decomposedColor = decomposeColor(color)
   

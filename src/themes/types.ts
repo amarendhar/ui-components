@@ -29,7 +29,8 @@ export interface CommonColors {
 
 export type ColorPartial = Partial<Color>
 
-export type PaletteColorOptions = SimplePaletteColorOptions | ColorPartial
+// Note: Material-UI type of 'PaletteColorOptions'
+// export type PaletteColorOptions = SimplePaletteColorOptions | ColorPartial
 
 // Note: Material-UI type of 'SimplePaletteColorOptions'
 // export interface SimplePaletteColorOptions {
@@ -39,12 +40,11 @@ export type PaletteColorOptions = SimplePaletteColorOptions | ColorPartial
 //   contrastText?: string
 // }
 
-// Note: ui-library type of 'SimplePaletteColorOptions'
-export type SimplePaletteColorOptions = string
+export type PaletteColorOptions = string
 
 export interface PaletteColor {
-  light: string
   main: string
+  light: string
   dark: string
   contrastText: string
 }
@@ -121,4 +121,9 @@ export interface Palette {
   // background: TypeBackground;
   // getContrastText: (background: string) => string;
   // augmentColor: (options: PaletteAugmentColorOptions) => PaletteColor;
+}
+
+export type DecomposedColor = {
+  type: string
+  rgbValues: number[]
 }

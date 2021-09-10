@@ -2,6 +2,51 @@ import createPalette from '../createPalette'
 import { PALETTE_MODE } from 'themes/types'
 
 describe('createPalette', () => {
+  it('Should return palette for light-mode', () => {
+    const palette = createPalette()
+
+    expect(palette).toEqual({
+      ...lightPalette,
+      mode: PALETTE_MODE.LIGHT,
+    })
+
+    expect(palette).toMatchSnapshot()
+  })
+
+  it('Should return palette for dark-mode', () => {
+    const palette = createPalette({
+      mode: PALETTE_MODE.DARK,
+    })
+
+    expect(palette).toEqual({
+      ...darkPalette,
+      mode: PALETTE_MODE.DARK,
+    })
+
+    expect(palette).toMatchSnapshot()
+  })
+
+  /**
+   * For Color codes refer
+   *  https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=FF9800&secondary.color=2196F3
+   *
+   * where '#e65100' is orange[500]
+   * where '#2196f3' is blue[500]
+   */
+  it('Should return palette for primary-orange & secondary-blue', () => {
+    const palette = createPalette({
+      primary: '#e65100',
+      secondary: '#2196f3',
+    })
+
+    expect(palette).toEqual({
+      ...primaryOrangeAndSecondaryBluePalette,
+      mode: PALETTE_MODE.LIGHT,
+    })
+
+    expect(palette).toMatchSnapshot()
+  })
+
   const commonPalette = {
     common: {
       black: '#000',
@@ -63,7 +108,6 @@ describe('createPalette', () => {
       light: 'rgb(83, 196, 247)',
       main: '#29b6f6',
     },
-    mode: 'dark',
     primary: {
       contrastText: 'rgba(0, 0, 0, 0.87)',
       dark: 'rgb(100, 141, 174)',
@@ -104,7 +148,6 @@ describe('createPalette', () => {
       light: 'rgb(52, 159, 218)',
       main: '#0288d1',
     },
-    mode: 'light',
     primary: {
       contrastText: '#fff',
       dark: 'rgb(161, 56, 0)',
@@ -130,38 +173,4 @@ describe('createPalette', () => {
       main: '#ED6C02',
     },
   }
-
-  it('Should return palette for light-mode', () => {
-    expect(createPalette()).toEqual({
-      ...lightPalette,
-      mode: PALETTE_MODE.LIGHT,
-    })
-  })
-
-  it('Should return palette for dark-mode', () => {
-    expect(
-      createPalette({
-        mode: PALETTE_MODE.DARK,
-      })
-    ).toEqual({
-      ...darkPalette,
-      mode: PALETTE_MODE.DARK,
-    })
-  })
-
-  /**
-   * For Color codes refer 
-   *  https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=FF9800&secondary.color=2196F3
-   * 
-   * where '#e65100' is orange[500]
-   * where '#2196f3' is blue[500]
-   */
-  it('Should return palette for primary-orange & secondary-blue', () => {
-    expect(
-      createPalette({
-        primary: '#e65100',
-        secondary: '#2196f3',
-      })
-    ).toEqual(primaryOrangeAndSecondaryBluePalette)
-  })
 })
