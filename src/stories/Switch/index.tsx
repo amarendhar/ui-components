@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { variants } from 'themes/themeUtils'
-import { CommonVariants, CommonSizes } from 'types'
+import { CommonColors, CommonSizes } from 'types'
 import { createClassName } from 'utils/helpers'
 
 type SwitchBoxProps = {
@@ -12,7 +12,7 @@ type SwitchBoxProps = {
   value?: boolean
   disabled?: boolean
   children: React.ReactNode
-  variant?: CommonVariants
+  variant?: CommonColors
   size?: CommonSizes
 }
 
@@ -23,7 +23,7 @@ export const SwitchBox = ({
   value = false,
   disabled = false,
   children,
-  variant = CommonVariants.default,
+  variant = CommonColors.default,
   size = CommonSizes.medium,
   ...restProps
 }: SwitchBoxProps) => {
@@ -114,12 +114,12 @@ const SwitchContainer = styled.span<{
 
   ${({ theme, variant, size, checked }) => {
     const bg = checked
-      ? variant === CommonVariants.default
+      ? variant === CommonColors.default
         ? theme.colors.grey
         : theme[variant]['bg']
       : theme.colors.grey
     const border = checked
-      ? variant === CommonVariants.default
+      ? variant === CommonColors.default
         ? theme.colors.grey
         : theme[variant]['border']
       : theme.colors.grey

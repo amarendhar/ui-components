@@ -1,4 +1,5 @@
 import { ObjType } from 'types'
+import { createPalette } from './themeUtils'
 
 export const colors = {
   white: {
@@ -50,9 +51,9 @@ export const space = {
 }
 
 export const fontSize = {
-  small: 14,
-  medium: 15,
-  large: 16,
+  small: 13,
+  medium: 14,
+  large: 15,
 }
 
 export const paddingFactor = {
@@ -81,6 +82,8 @@ export const mediaQuery: ObjType = {
   '<lg': `@media (max-width: 1199px)`, // "< 1200"
 }
 
+const palette = createPalette()
+
 export const defaultTheme = {
   /**
    * Do not include custom-breakpoints like below,
@@ -93,6 +96,7 @@ export const defaultTheme = {
   fontSize,
   paddingFactor,
   colors,
+  palette,
   default: {
     bg: colors.silver,
     border: colors.silver,

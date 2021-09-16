@@ -1,8 +1,5 @@
 import { DecomposedColor } from 'themes/types'
 
-/**
- * ToDo: Do not use type 'any'
- */
 export const hexToRgb = (color: string): string => {
   color = color.substr(1)
   const re = new RegExp(`.{1,${color.length >= 6 ? 2 : 1}}`, 'g')
@@ -24,9 +21,9 @@ export const hexToRgb = (color: string): string => {
 }
 
 export const decomposeColor = (color: string): DecomposedColor => {
-  const rgbColor = color.charAt(0) === '#' ? hexToRgb(color) : color // rgb(r-value, g-value, b-value)
+  const rgbColor = color.charAt(0) === '#' ? hexToRgb(color) : color // rgb(r, g, b)
   const marker = rgbColor.indexOf('(')
-  // 'substring' is fastest than 'replace' because: It avoids compiling a regular expression.
+  // Note: 'substring' is fastest than 'replace' because: It avoids compiling a regular expression.
   const type = rgbColor.substring(0, marker)
 
   if (
@@ -45,7 +42,7 @@ export const decomposeColor = (color: string): DecomposedColor => {
 
   return {
     type, // rgb or rgba
-    rgbValues, // [r-value, g-value, b-value] or [r-value, g-value, b-value, alpha-value]
+    rgbValues, // [r, g, b] or [r, g, b, a]
   }
 }
 
@@ -60,7 +57,7 @@ export const clamp = (
 export const recomposeColor = (color: DecomposedColor): string => {
   let { rgbValues } = color
 
-  // Only convert the first 3 rgbValues to int (i.e. not alpha) from rgb(r-value, g-value, b-value, alpha-value)
+  // Only convert the first 3 rgbValues to int (i.e. not alpha) from rgb(r, g, b, a)
   rgbValues = rgbValues.map((n, i) => (i < 3 ? parseInt(String(n), 10) : n))
 
   return `${color.type}(${rgbValues.join(', ')})`
@@ -78,6 +75,18 @@ export const lighten = ({
   )
 
   return recomposeColor(color)
+}
+
+export const alpha = (color: string, value: number): string => {
+  const { type, rgbValues } = decomposeColor(color)
+
+  value = clamp(value)
+  rgbValues[3] = value
+
+  return recomposeColor({
+    type: type + 'a',
+    rgbValues,
+  })
 }
 
 export const darken = ({

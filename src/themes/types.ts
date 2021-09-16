@@ -1,6 +1,6 @@
 export enum PALETTE_MODE {
   LIGHT = 'light',
-  DARK = 'dark'
+  DARK = 'dark',
 }
 
 export interface Color {

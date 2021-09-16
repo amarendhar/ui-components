@@ -20,16 +20,25 @@ export type StyleObj = {
  *  https://react-bootstrap.github.io/components/buttons/
  */
 
-export enum CommonVariants {
+export enum CommonColors {
   default = 'default',
   primary = 'primary',
+  secondary = 'secondary',
   success = 'success',
   warning = 'warning',
-  danger = 'danger',
+  error = 'error',
+  info = 'info',
+  disabled = 'disabled',
 }
 
 export enum CommonSizes {
   small = 'small',
   medium = 'medium',
   large = 'large',
+}
+
+export enum CommonVariant {
+  contained = 'contained',
+  outlined = 'outlined',
+  text = 'text',
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Flex, Text } from 'rebass'
 import { SwitchBox } from './index'
-import { CommonVariants, CommonSizes } from 'types'
+import { CommonColors, CommonSizes } from 'types'
 
 export default {
   title: 'Components/SwitchBox',
@@ -48,37 +48,37 @@ const Template: ComponentStory<typeof SwitchBox> = (args) => {
 
 export const Default = Template.bind({})
 Default.args = {
-  variant: CommonVariants.default,
+  variant: CommonColors.default,
   children: 'Default',
 }
 
 export const Primary = Template.bind({})
 Primary.args = {
-  variant: CommonVariants.primary,
+  variant: CommonColors.primary,
   children: 'Primary',
 }
 
 export const Success = Template.bind({})
 Success.args = {
-  variant: CommonVariants.success,
+  variant: CommonColors.success,
   children: 'Success',
 }
 
 export const Warning = Template.bind({})
 Warning.args = {
-  variant: CommonVariants.warning,
+  variant: CommonColors.warning,
   children: 'Warning',
 }
 
 export const Danger = Template.bind({})
 Danger.args = {
-  variant: CommonVariants.danger,
+  variant: CommonColors.danger,
   children: 'Danger',
 }
 
 export const Disabled = Template.bind({})
 Disabled.args = {
-  variant: CommonVariants.danger,
+  variant: CommonColors.danger,
   disabled: true,
   children: 'Disabled',
 }

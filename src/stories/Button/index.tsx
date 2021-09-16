@@ -1,26 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
-import { CommonVariants, CommonSizes } from 'types'
+import { CommonColors, CommonSizes, CommonVariant } from 'types'
 
 type ButtonProps = {
+  color?: CommonColors
+  size?: CommonSizes
+  variant?: CommonVariant
   'data-testid'?: string
   className?: string
   onClick?: () => void
   disabled?: boolean
   children: React.ReactNode
-  variant?: CommonVariants
-  size?: CommonSizes
-  outlined?: boolean
 }
 
 export const Button = ({
+  color = CommonColors.default,
+  size = CommonSizes.medium,
+  variant = CommonVariant.contained,
   className = '',
   onClick = () => {},
   disabled = false,
   children,
-  variant = CommonVariants.default,
-  size = CommonSizes.medium,
-  outlined = false,
   ...restProps
 }: ButtonProps) => {
   return (
@@ -29,9 +29,9 @@ export const Button = ({
       className={className}
       onClick={onClick}
       disabled={disabled}
-      variant={variant}
+      color={color}
       size={size}
-      outlined={outlined}
+      variant={variant}
     >
       <span>{children}</span>
     </ButtonContainer>
@@ -41,9 +41,9 @@ export const Button = ({
 export default Button
 
 const ButtonContainer = styled.button<{
-  variant: string
+  color: string
   size: string
-  outlined: boolean
+  variant: string
 }>`
   position: relative;
   box-sizing: border-box;
@@ -52,122 +52,77 @@ const ButtonContainer = styled.button<{
   outline: none;
   user-select: none;
   transition: all 300ms ease 0s;
+  ${({ theme, variant, size, color }) => {
+    const { palette, space, fontSize, paddingFactor } = theme
+    const { main, dark, light, contrastText } =
+      palette[variant]?.[color] || palette[color]
 
-  ${({ theme, variant, size, outlined }) => {
-    const { paddingFactor } = theme
-    const bg = outlined ? theme[variant]['outline']['bg'] : theme[variant]['bg']
-    const border = outlined
-      ? theme[variant]['outline']['border']
-      : theme[variant]['border']
-    const text = outlined
-      ? theme[variant]['outline']['text']
-      : theme[variant]['text']
+    const css =
+      variant === CommonVariant.text
+        ? `
+        background-color: transparent;
+        color: ${main};
 
-    const disabledBg = outlined ? theme.disabled.outline.bg : theme.disabled.bg
-    const borderBg = outlined
-      ? theme.disabled.outline.border
-      : theme.disabled.border
-    const textBg = outlined ? theme.disabled.outline.text : theme.disabled.text
+        &:hover {
+          background-color: ${light};
+        }
+        
+        &:active {
+          background-color: ${dark};
+        }
 
-    return `
-      border-radius: ${theme.space.small}px;
-      padding: ${paddingFactor[size]}px ${paddingFactor[size] * 3 - 2}px;
-      font-size: ${theme.fontSize[size]}px;
-      background-color: ${bg[80]};
-      border: 1px solid ${border[80]};
-      color: ${text[80]};
-      
+        &:disabled {
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+      `
+        : variant === CommonVariant.outlined
+        ? `
+        background-color: transparent;
+        border: 1px solid ${contrastText};
+        color: ${main};
+
+        &:hover {
+          background-color: ${light};
+          border: 1px solid ${main};
+        }
+        
+        &:active {
+          background-color: ${dark};
+          border: 1px solid ${main};
+        }
+
+        &:disabled {
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+      `
+        : `
+      background-color: ${main};
+      border: 1px solid ${main};
+      color: ${contrastText};
+
       &:hover {
-        background-color: ${bg[100]};
-        border: 1px solid ${border[100]};
-        color: ${text[100]};
+        background-color: ${dark};
+        border: 1px solid ${dark};
       }
 
       &:active {
-        opacity: 0.6;
+        background-color: ${light};
+        border: 1px solid ${light};
       }
 
       &:disabled {
-        background-color: ${disabledBg[80]};
-        border: 1px solid ${borderBg[80]};
-        color: ${textBg[100]};
-        opacity: 0.6;
-        box-shadow: none;
         cursor: not-allowed;
+        pointer-events: none;
       }
+    `
+
+    return `
+      padding: ${paddingFactor[size]}px ${theme.paddingFactor[size] * 3 - 2}px;
+      border-radius: ${space.small}px;
+      font-size: ${fontSize[size]}px;
+      ${css};
     `
   }}
 `
-
-// const ButtonContainerOld = styled.button<{
-//   variant: string
-//   size: string
-//   outlined: boolean
-// }>`
-//   position: relative;
-//   box-sizing: border-box;
-//   cursor: pointer;
-//   border: 0;
-//   outline: none;
-//   user-select: none;
-//   transition: all 300ms ease 0s;
-
-//   ${({ theme, variant, size, outlined }) => {
-//     const { paddingFactor } = theme
-
-//     return outlined
-//       ? `
-//       border-radius: ${theme.space.small}px;
-//       padding: ${paddingFactor[size]}px ${paddingFactor[size] * 3 - 2}px;
-//       font-size: ${theme.fontSize[size]}px;
-//       background-color: transparent;
-//       border: 1px solid ${theme[variant]['outlineBg'][80]};
-//       color: ${theme[variant]['outlineBg'][80]};
-
-//       &:hover {
-//         background-color: ${theme.colors.silver[60]};
-//         border: 1px solid ${theme[variant]['outlineBg'][100]};
-//         color: ${theme[variant]['outlineBg'][100]};
-//       }
-
-//       &:active {
-//         opacity: 0.6;
-//       }
-
-//       &:disabled {
-//         background-color: transparent;
-//         border: 1px solid ${theme.disabled.bg[80]};
-//         color: ${theme.disabled.text[100]};
-//         opacity: 0.6;
-//         box-shadow: none;
-//         cursor: not-allowed;
-//       }
-//     `
-//       : `
-//       border-radius: ${theme.space.small}px;
-//       padding: ${paddingFactor[size]}px ${paddingFactor[size] * 3 - 2}px;
-//       font-size: ${theme.fontSize[size]}px;
-//       background-color: ${theme[variant]['bg'][80]};
-//       border: 1px solid ${theme[variant]['bg'][80]};
-//       color: ${theme[variant]['text'][100]};
-
-//       &:hover {
-//         background-color: ${theme[variant]['bg'][100]};
-//         border: 1px solid ${theme[variant]['bg'][100]};
-//       }
-
-//       &:active {
-//         opacity: 0.6;
-//       }
-
-//       &:disabled {
-//         background-color: ${theme.disabled.bg[80]};
-//         border: 1px solid ${theme.disabled.bg[80]};
-//         color: ${theme.disabled.text[100]};
-//         opacity: 0.6;
-//         box-shadow: none;
-//         cursor: not-allowed;
-//       }
-//     `
-//   }}
-// `

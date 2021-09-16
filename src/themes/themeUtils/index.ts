@@ -1,7 +1,4 @@
 import createPalette from './createPalette'
 import variants from './variants'
 
-export {
-  createPalette,
-  variants
-}
+export { createPalette, variants }

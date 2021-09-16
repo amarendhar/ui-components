@@ -1,4 +1,5 @@
-import { PaletteColor, PaletteOptions } from 'themes/types'
+import { PaletteColor, PaletteOptions, PALETTE_MODE } from 'themes/types'
+import { CommonVariant } from 'types'
 import colors from '../colors'
 import {
   decomposeColor,
@@ -6,6 +7,7 @@ import {
   getContrastRatio,
   lighten,
   darken,
+  alpha,
 } from './colorManipulator'
 
 const tonalOffset = 0.2
@@ -121,7 +123,7 @@ const getContrastText = (background: string) => {
 const getColorStates = (color: string): PaletteColor => {
   // Note: Do not use common variable like below, it's not giving correct 'dark' value, when used common variable like that.
   // const decomposedColor = decomposeColor(color)
-  
+
   return {
     main: color,
     light: lighten({
@@ -136,19 +138,54 @@ const getColorStates = (color: string): PaletteColor => {
   }
 }
 
+const getColorStatesForOutlined = (color: string): PaletteColor => {
+  return {
+    main: color,
+    light: alpha(color, 0.04),
+    dark: alpha(color, 0.32),
+    contrastText: alpha(color, 0.5),
+  }
+}
+
+const getColorStatesForText = (color: string): PaletteColor => {
+  return {
+    main: color,
+    light: alpha(color, 0.04),
+    dark: alpha(color, 0.32),
+    contrastText: alpha(color, 0.5),
+  }
+}
+
 /**
  * Refer `paletteOutput` object from @material-ui/core/styles/createPalette.js
  */
 const createPalette = (palette: PaletteOptions = {}) => {
-  const mode = palette?.mode || 'light'
+  const mode = palette?.mode || PALETTE_MODE.LIGHT
   const {
-    primary = mode === 'dark' ? colors.blue[200] : colors.blue[700],
-    secondary = mode === 'dark' ? colors.purple[200] : colors.purple[500],
-    error = mode === 'dark' ? colors.red[500] : colors.red[700],
-    info = mode === 'dark' ? colors.lightBlue[400] : colors.lightBlue[700],
-    success = mode === 'dark' ? colors.green[400] : colors.green[800],
-    warning = mode === 'dark' ? colors.orange[400] : '#ED6C02',
+    primary = mode === PALETTE_MODE.DARK ? colors.blue[200] : colors.blue[700],
+    secondary = mode === PALETTE_MODE.DARK
+      ? colors.purple[200]
+      : colors.purple[500],
+    error = mode === PALETTE_MODE.DARK ? colors.red[500] : colors.red[700],
+    info = mode === PALETTE_MODE.DARK
+      ? colors.lightBlue[400]
+      : colors.lightBlue[700],
+    success = mode === PALETTE_MODE.DARK
+      ? colors.green[400]
+      : colors.green[800],
+    warning = mode === PALETTE_MODE.DARK ? colors.orange[400] : '#ED6C02',
   } = palette
+
+  const disabled =
+    mode === PALETTE_MODE.DARK
+      ? {
+          main: dark.action.disabledBackground,
+          contrastText: dark.action.disabled,
+        }
+      : {
+          main: light.action.disabledBackground,
+          contrastText: light.action.disabled,
+        }
 
   const paletteOutput = {
     // A collection of common colors.
@@ -162,6 +199,23 @@ const createPalette = (palette: PaletteOptions = {}) => {
     info: getColorStates(info),
     success: getColorStates(success),
     warning: getColorStates(warning),
+    disabled,
+    [CommonVariant.outlined]: {
+      primary: getColorStatesForOutlined(primary),
+      secondary: getColorStatesForOutlined(secondary),
+      error: getColorStatesForOutlined(error),
+      info: getColorStatesForOutlined(info),
+      success: getColorStatesForOutlined(success),
+      warning: getColorStatesForOutlined(warning),
+    },
+    [CommonVariant.text]: {
+      primary: getColorStatesForText(primary),
+      secondary: getColorStatesForText(secondary),
+      error: getColorStatesForText(error),
+      info: getColorStatesForText(info),
+      success: getColorStatesForText(success),
+      warning: getColorStatesForText(warning),
+    },
   }
 
   return paletteOutput
