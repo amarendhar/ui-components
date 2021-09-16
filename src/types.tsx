@@ -16,7 +16,7 @@ export type StyleObj = {
 }
 
 /**
- * Variants referenced from react-bootstrap
+ * Variants referred from react-bootstrap
  *  https://react-bootstrap.github.io/components/buttons/
  */
 

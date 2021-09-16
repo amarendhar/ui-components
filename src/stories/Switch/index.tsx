@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { variants } from 'themes/themeUtils'
+import { getStyles } from 'themes/themeUtils'
 import { CommonColors, CommonSizes } from 'types'
 import { createClassName } from 'utils/helpers'
 
@@ -82,7 +82,7 @@ const Container = styled.div<{ disabled: boolean }>`
   }
 `
 
-const sizeVariants = variants({
+const sizeVariants = getStyles({
   size: {
     small: {
       width: 28,
@@ -146,7 +146,7 @@ const SwitchContainer = styled.span<{
   }}
 `
 
-const transformVariants = variants({
+const transformVariants = getStyles({
   size: {
     small: {
       width: 10,

@@ -1,4 +1,4 @@
 import createPalette from './createPalette'
-import variants from './variants'
+import getStyles from './getStyles'
 
-export { createPalette, variants }
+export { createPalette, getStyles }
