@@ -1,5 +1,5 @@
 import createPalette from '../createPalette'
-import { PALETTE_MODE } from 'themes/types'
+import { PALETTE_MODE } from 'themes/themTypes'
 
 describe('createPalette', () => {
   it('Should return palette for light-mode', () => {

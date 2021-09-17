@@ -82,21 +82,40 @@ const Container = styled.div<{ disabled: boolean }>`
   }
 `
 
-const sizeVariants = getStyles({
-  size: {
-    small: {
-      width: 28,
-      height: 14,
+/**
+ * Note: Use function instead of arrow-function,
+ *  bcz generic-types `T`, such as `function <T>(props: T)`, won't work with arrow-function due to `Styled-Function` type-definition may expect function not arrow-function.
+ *
+ * Replace `(props: any)` with `function <T>(props: T)`, where `T` should be `Styled-Function` return-type.
+ *  `Styled-Function` looks like this:
+ *    const getColor = props => ({
+ *      color: props.color,
+ *    })
+ *    const Box = styled.div`
+ *      ${getColor}
+ *    `
+ *
+ *  Here in the above example `getColor-Function` is `Styled-Function`.
+ *  Here in `function <T>(props: T)`, the type `T` should be `Styled-Function` return-type.
+ */
+
+const sizeVariants = getStyles((props) => {
+  return {
+    size: {
+      small: {
+        width: 28,
+        height: 14,
+      },
+      medium: {
+        width: 33,
+        height: 18,
+      },
+      large: {
+        width: 45,
+        height: 21,
+      },
     },
-    medium: {
-      width: 33,
-      height: 18,
-    },
-    large: {
-      width: 45,
-      height: 21,
-    },
-  },
+  }
 })
 
 const SwitchContainer = styled.span<{
@@ -146,33 +165,35 @@ const SwitchContainer = styled.span<{
   }}
 `
 
-const transformVariants = getStyles({
-  size: {
-    small: {
-      width: 10,
-      height: 10,
-      transform: 'translateX(3px)',
-      '&.checked': {
-        transform: 'translateX(15px)',
+const transformVariants = getStyles((props: any) => {
+  return {
+    size: {
+      small: {
+        width: 10,
+        height: 10,
+        transform: 'translateX(3px)',
+        '&.checked': {
+          transform: 'translateX(15px)',
+        },
+      },
+      medium: {
+        width: 12,
+        height: 12,
+        transform: 'translateX(3px)',
+        '&.checked': {
+          transform: 'translateX(18px)',
+        },
+      },
+      large: {
+        width: 15,
+        height: 15,
+        transform: 'translateX(3px)',
+        '&.checked': {
+          transform: 'translateX(27px)',
+        },
       },
     },
-    medium: {
-      width: 12,
-      height: 12,
-      transform: 'translateX(3px)',
-      '&.checked': {
-        transform: 'translateX(18px)',
-      },
-    },
-    large: {
-      width: 15,
-      height: 15,
-      transform: 'translateX(3px)',
-      '&.checked': {
-        transform: 'translateX(27px)',
-      },
-    },
-  },
+  }
 })
 
 const Switch = styled.span<{ checked: boolean; size: CommonSizes }>`

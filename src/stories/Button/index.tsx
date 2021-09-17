@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { getStyles } from 'themes/themeUtils'
 import { CommonColors, CommonSizes, CommonVariant } from 'types'
 
 type ButtonProps = {
@@ -14,7 +15,7 @@ type ButtonProps = {
 }
 
 export const Button = ({
-  color = CommonColors.default,
+  color = CommonColors.primary,
   size = CommonSizes.medium,
   variant = CommonVariant.contained,
   className = '',
@@ -40,6 +41,84 @@ export const Button = ({
 
 export default Button
 
+const buttonVariants = getStyles<{
+  color: CommonColors
+  size: CommonSizes
+  variant: CommonVariant
+}>((props) => {
+  const { theme, variant, size, color } = props
+  const { palette, fontSize } = theme
+  const { main, dark, light, contrastText } =
+    palette[variant]?.[color] || palette[color]
+
+  return {
+    size: {
+      [CommonSizes.small]: {
+        padding: '4px 10px',
+        fontSize: fontSize[size],
+      },
+      [CommonSizes.medium]: {
+        padding: '6px 16px',
+        fontSize: fontSize[size],
+      },
+      [CommonSizes.large]: {
+        padding: '8px 22px',
+        fontSize: fontSize[size],
+      },
+    },
+    variant: {
+      [CommonVariant.text]: {
+        backgroundColor: 'transparent',
+        color: main,
+        '&:hover': {
+          backgroundColor: light,
+        },
+        '&:active': {
+          backgroundColor: dark,
+        },
+        '&:disabled': {
+          cursor: 'not-allowed',
+          pointerEvents: 'none',
+        },
+      },
+      [CommonVariant.outlined]: {
+        backgroundColor: 'transparent',
+        border: `1px solid ${contrastText}`,
+        color: main,
+        '&:hover': {
+          backgroundColor: light,
+          border: `1px solid ${main}`,
+        },
+        '&:active': {
+          backgroundColor: dark,
+          border: `1px solid ${main}`,
+        },
+        '&:disabled': {
+          cursor: 'not-allowed',
+          pointerEvents: 'none',
+        },
+      },
+      [CommonVariant.contained]: {
+        backgroundColor: main,
+        border: `1px solid ${main}`,
+        color: contrastText,
+        '&:hover': {
+          backgroundColor: dark,
+          border: `1px solid ${dark}`,
+        },
+        '&:active': {
+          backgroundColor: light,
+          border: `1px solid ${light}`,
+        },
+        '&:disabled': {
+          cursor: 'not-allowed',
+          pointerEvents: 'none',
+        },
+      },
+    },
+  }
+})
+
 const ButtonContainer = styled.button<{
   color: string
   size: string
@@ -52,78 +131,7 @@ const ButtonContainer = styled.button<{
   outline: none;
   user-select: none;
   transition: all 300ms ease 0s;
-  ${({ theme, variant, size, color }) => {
-    const { palette, space, fontSize, paddingFactor } = theme
-    const { main, dark, light, contrastText } =
-      palette[variant]?.[color] || palette[color]
+  border-radius: ${({ theme }) => theme.space.small}px;
 
-    // ToDo: use getStyles-util instead of using nested-ternary operator.
-    const css =
-      variant === CommonVariant.text
-        ? `
-        background-color: transparent;
-        color: ${main};
-
-        &:hover {
-          background-color: ${light};
-        }
-        
-        &:active {
-          background-color: ${dark};
-        }
-
-        &:disabled {
-          cursor: not-allowed;
-          pointer-events: none;
-        }
-      `
-        : variant === CommonVariant.outlined
-        ? `
-        background-color: transparent;
-        border: 1px solid ${contrastText};
-        color: ${main};
-
-        &:hover {
-          background-color: ${light};
-          border: 1px solid ${main};
-        }
-        
-        &:active {
-          background-color: ${dark};
-          border: 1px solid ${main};
-        }
-
-        &:disabled {
-          cursor: not-allowed;
-          pointer-events: none;
-        }
-      `
-        : `
-      background-color: ${main};
-      border: 1px solid ${main};
-      color: ${contrastText};
-
-      &:hover {
-        background-color: ${dark};
-        border: 1px solid ${dark};
-      }
-
-      &:active {
-        background-color: ${light};
-        border: 1px solid ${light};
-      }
-
-      &:disabled {
-        cursor: not-allowed;
-        pointer-events: none;
-      }
-    `
-
-    return `
-      padding: ${paddingFactor[size]}px ${theme.paddingFactor[size] * 3 - 2}px;
-      border-radius: ${space.small}px;
-      font-size: ${fontSize[size]}px;
-      ${css};
-    `
-  }}
+  ${buttonVariants}
 `

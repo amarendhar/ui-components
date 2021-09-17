@@ -21,14 +21,16 @@ export type StyleObj = {
  */
 
 export enum CommonColors {
-  default = 'default',
+  // ToDo: is default-type required ?
+  // default = 'default',
   primary = 'primary',
   secondary = 'secondary',
-  success = 'success',
-  warning = 'warning',
   error = 'error',
   info = 'info',
-  disabled = 'disabled',
+  success = 'success',
+  warning = 'warning',
+  // ToDo: is disable-type required ?
+  // disabled = 'disabled',
 }
 
 export enum CommonSizes {

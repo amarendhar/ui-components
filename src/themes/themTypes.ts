@@ -1,3 +1,56 @@
+import { CommonVariant, CustomObjType, ObjType } from 'types'
+
+// ToDo: Remove this, this is old type
+export type oldColorPalette = {
+  bg: ObjType
+  border: ObjType
+  text: ObjType
+}
+
+export type oldColors = {
+  white: ObjType
+  blue: ObjType
+  green: ObjType
+  orange: ObjType
+  red: ObjType
+  grey: ObjType
+  silver: ObjType
+  black: ObjType
+  yellow: ObjType
+  outline: ObjType
+}
+
+export type Theme = {
+  breakpoints: CustomObjType<number>
+  mediaQuery: CustomObjType<string>
+  space: CustomObjType<number>
+  fontSize: CustomObjType<number>
+  palette: Palette
+  // ToDo: Remove all below types, these are old types
+  colors?: oldColors
+  default?: oldColorPalette & {
+    outline: oldColorPalette
+  }
+  primary?: oldColorPalette & {
+    outline: oldColorPalette
+  }
+  success?: oldColorPalette & {
+    outline: oldColorPalette
+  }
+  warning?: oldColorPalette & {
+    outline: oldColorPalette
+  }
+  danger?: oldColorPalette & {
+    outline: oldColorPalette
+  }
+  disabled?: oldColorPalette & {
+    outline: oldColorPalette
+  }
+}
+
+/**
+ * Types Referred from material-ui
+ */
 export enum PALETTE_MODE {
   LIGHT = 'light',
   DARK = 'dark',
@@ -89,9 +142,9 @@ export interface PaletteOptions {
   primary?: PaletteColorOptions
   secondary?: PaletteColorOptions
   error?: PaletteColorOptions
-  warning?: PaletteColorOptions
   info?: PaletteColorOptions
   success?: PaletteColorOptions
+  warning?: PaletteColorOptions
   grey?: ColorPartial
   text?: Partial<TypeText>
   // contrastThreshold?: number
@@ -103,17 +156,24 @@ export interface PaletteOptions {
   // augmentColor: (options: PaletteAugmentColorOptions) => PaletteColor;
 }
 
-export interface Palette {
-  common: CommonColors
-  mode: PALETTE_MODE
+export type CommonPalette = {
   primary: PaletteColor
   secondary: PaletteColor
   error: PaletteColor
-  warning: PaletteColor
   info: PaletteColor
   success: PaletteColor
-  grey: Color
-  text: TypeText
+  warning: PaletteColor
+}
+
+export interface Palette extends CommonPalette {
+  common?: CommonColors
+  mode?: PALETTE_MODE
+  grey?: Color
+  // text?: TypeText
+  // ToDo: CommonVariant.contained is required ?
+  [CommonVariant.contained]: CommonPalette
+  [CommonVariant.outlined]: CommonPalette
+  [CommonVariant.text]: CommonPalette
   // contrastThreshold: number;
   // tonalOffset: PaletteTonalOffset;
   // divider: TypeDivider;

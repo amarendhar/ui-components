@@ -1,4 +1,4 @@
-import { DecomposedColor } from 'themes/types'
+import { DecomposedColor } from 'themes/themTypes'
 
 export const hexToRgb = (color: string): string => {
   color = color.substr(1)

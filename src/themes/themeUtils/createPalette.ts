@@ -1,4 +1,9 @@
-import { PaletteColor, PaletteOptions, PALETTE_MODE } from 'themes/types'
+import {
+  PaletteColor,
+  PaletteOptions,
+  PALETTE_MODE,
+  Palette,
+} from 'themes/themTypes'
 import { CommonVariant } from 'types'
 import colors from '../colors'
 import {
@@ -159,7 +164,7 @@ const getColorStatesForText = (color: string): PaletteColor => {
 /**
  * Refer `paletteOutput` object from @material-ui/core/styles/createPalette.js
  */
-const createPalette = (palette: PaletteOptions = {}) => {
+const createPalette = (palette: PaletteOptions = {}): Palette => {
   const mode = palette?.mode || PALETTE_MODE.LIGHT
   const {
     primary = mode === PALETTE_MODE.DARK ? colors.blue[200] : colors.blue[700],
@@ -200,6 +205,15 @@ const createPalette = (palette: PaletteOptions = {}) => {
     success: getColorStates(success),
     warning: getColorStates(warning),
     disabled,
+    // ToDo: CommonVariant.contained is required ?
+    [CommonVariant.contained]: {
+      primary: getColorStates(primary),
+      secondary: getColorStates(secondary),
+      error: getColorStates(error),
+      info: getColorStates(info),
+      success: getColorStates(success),
+      warning: getColorStates(warning),
+    },
     [CommonVariant.outlined]: {
       primary: getColorStatesForOutlined(primary),
       secondary: getColorStatesForOutlined(secondary),

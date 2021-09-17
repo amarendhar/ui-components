@@ -122,7 +122,7 @@ const green = {
   A700: '#00c853',
 }
 
-type colorType = {
+export type ColorType = {
   50: string
   100: string
   200: string
@@ -139,18 +139,29 @@ type colorType = {
   A700: string
 }
 
-const colors: {
+export type Colors = {
   common: {
     black: string
     white: string
   }
-  grey: colorType
-  purple: colorType
-  red: colorType
-  orange: colorType
-  blue: colorType
-  lightBlue: colorType
-  green: colorType
-} = { common, grey, purple, red, orange, blue, lightBlue, green }
+  grey: ColorType
+  purple: ColorType
+  red: ColorType
+  orange: ColorType
+  blue: ColorType
+  lightBlue: ColorType
+  green: ColorType
+}
+
+const colors: Colors = {
+  common,
+  grey,
+  purple,
+  red,
+  orange,
+  blue,
+  lightBlue,
+  green,
+}
 
 export default colors

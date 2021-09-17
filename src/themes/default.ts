@@ -1,7 +1,8 @@
-import { ObjType } from 'types'
+import { oldColors, Palette, Theme } from './themTypes'
 import { createPalette } from './themeUtils'
 
-export const colors = {
+// ToDo: Remove this, this is old code
+export const colors: oldColors = {
   white: {
     100: '#ffffff',
     80: '#ecedef',
@@ -44,31 +45,26 @@ export const colors = {
   },
 }
 
-export const space = {
+export const space: Theme['space'] = {
   small: 5,
   medium: 10,
   large: 15,
 }
 
-export const fontSize = {
+export const fontSize: Theme['fontSize'] = {
   small: 13,
   medium: 14,
   large: 15,
 }
 
-export const paddingFactor = {
-  small: 4,
-  medium: 6,
-  large: 8,
-}
-
-export const breakpoints = {
+// ToDo: Remove this, this is old code
+export const breakpoints: Theme['breakpoints'] = {
   sm: 767, // Phones (767/75 i.e. 7.7 to 10.0 inch) -> "<=767 OR < 768"
   md: 768, // Tablets (>= 10 inch) -> ">= 768"
   lg: 992, // Laptops (>= 13 inch) -> ">= 992"
 }
 
-export const mediaQuery: ObjType = {
+export const mediaQuery: Theme['mediaQuery'] = {
   sm: `@media (max-width: ${breakpoints.sm}px)`, // Phones "<=767 OR < 768"
   md: `@media (min-width: ${breakpoints.md}px)`, // Tablets ">= 768"
   lg: `@media (min-width: ${breakpoints.lg}px)`, // Laptops ">= 992"
@@ -82,21 +78,22 @@ export const mediaQuery: ObjType = {
   '<lg': `@media (max-width: 1199px)`, // "< 1200"
 }
 
-const palette = createPalette()
+const palette: Palette = createPalette()
 
-export const defaultTheme = {
+export const defaultTheme: Theme = {
   /**
-   * Do not include custom-breakpoints like below,
+   * Do not include custom-breakpoints like below, when using styled-system library
    *  to avoid conflicts against breakpoints from styled-system npm,
    *  otherwise styled-system will throw error, and will not render UI in storybook.
    */
   // breakpoints,
+  breakpoints,
   mediaQuery,
   space,
   fontSize,
-  paddingFactor,
-  colors,
   palette,
+  // ToDo: Remove all below props, this is old code
+  colors,
   default: {
     bg: colors.silver,
     border: colors.silver,
