@@ -22,7 +22,7 @@ export type StyleObj = {
 
 export enum CommonColors {
   // ToDo: is default-type required ?
-  // default = 'default',
+  default = 'default',
   primary = 'primary',
   secondary = 'secondary',
   error = 'error',

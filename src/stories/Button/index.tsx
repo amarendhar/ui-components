@@ -1,12 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-import { getStyles } from 'themes/themeUtils'
+import { createPalette, getStyles } from 'themes/themeUtils'
 import { CommonColors, CommonSizes, CommonVariant } from 'types'
+
+console.log(createPalette())
 
 type ButtonProps = {
   color?: CommonColors
-  size?: CommonSizes
   variant?: CommonVariant
+  size?: CommonSizes
   'data-testid'?: string
   className?: string
   onClick?: () => void
@@ -16,8 +18,8 @@ type ButtonProps = {
 
 export const Button = ({
   color = CommonColors.primary,
-  size = CommonSizes.medium,
   variant = CommonVariant.contained,
+  size = CommonSizes.medium,
   className = '',
   onClick = () => {},
   disabled = false,
@@ -34,20 +36,23 @@ export const Button = ({
       size={size}
       variant={variant}
     >
-      <span>{children}</span>
+      <Label>{children}</Label>
     </ButtonContainer>
   )
 }
 
 export default Button
 
-const buttonVariants = getStyles<{
+export type ButtonStyledProps = {
   color: CommonColors
   size: CommonSizes
   variant: CommonVariant
-}>((props) => {
+}
+
+const buttonVariants = getStyles<ButtonStyledProps>((props) => {
   const { theme, variant, size, color } = props
   const { palette, fontSize } = theme
+  const { disabled } = palette
   const { main, dark, light, contrastText } =
     palette[variant]?.[color] || palette[color]
 
@@ -67,17 +72,22 @@ const buttonVariants = getStyles<{
       },
     },
     variant: {
-      [CommonVariant.text]: {
-        backgroundColor: 'transparent',
-        color: main,
+      [CommonVariant.contained]: {
+        backgroundColor: main,
+        border: `1px solid ${main}`,
+        color: contrastText,
         '&:hover': {
-          backgroundColor: light,
+          backgroundColor: dark,
+          border: `1px solid ${dark}`,
         },
         '&:active': {
-          backgroundColor: dark,
+          backgroundColor: light,
+          border: `1px solid ${light}`,
         },
         '&:disabled': {
-          cursor: 'not-allowed',
+          backgroundColor: disabled.main,
+          border: '1px solid transparent',
+          color: disabled.contrastText,
           pointerEvents: 'none',
         },
       },
@@ -94,24 +104,23 @@ const buttonVariants = getStyles<{
           border: `1px solid ${main}`,
         },
         '&:disabled': {
-          cursor: 'not-allowed',
+          border: `1px solid ${disabled.main}`,
+          color: disabled.contrastText,
           pointerEvents: 'none',
         },
       },
-      [CommonVariant.contained]: {
-        backgroundColor: main,
-        border: `1px solid ${main}`,
-        color: contrastText,
+      [CommonVariant.text]: {
+        backgroundColor: 'transparent',
+        border: '1px solid transparent',
+        color: main,
         '&:hover': {
-          backgroundColor: dark,
-          border: `1px solid ${dark}`,
+          backgroundColor: light,
         },
         '&:active': {
-          backgroundColor: light,
-          border: `1px solid ${light}`,
+          backgroundColor: dark,
         },
         '&:disabled': {
-          cursor: 'not-allowed',
+          color: disabled.contrastText,
           pointerEvents: 'none',
         },
       },
@@ -119,11 +128,11 @@ const buttonVariants = getStyles<{
   }
 })
 
-const ButtonContainer = styled.button<{
-  color: string
-  size: string
-  variant: string
-}>`
+/**
+ * ToDo: `line-height: 1.7` is suggested from Material-UI,
+ *  but is it really required ??
+ */
+const ButtonContainer = styled.button<ButtonStyledProps>`
   position: relative;
   box-sizing: border-box;
   cursor: pointer;
@@ -132,6 +141,9 @@ const ButtonContainer = styled.button<{
   user-select: none;
   transition: all 300ms ease 0s;
   border-radius: ${({ theme }) => theme.space.small}px;
+  line-height: 1.7;
 
   ${buttonVariants}
 `
+
+const Label = styled.span``

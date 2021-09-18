@@ -1,3 +1,5 @@
+import { Color } from "themes/themTypes"
+
 const common = {
   black: '#000',
   white: '#fff',
@@ -14,9 +16,9 @@ const grey = {
   700: '#616161',
   800: '#424242',
   900: '#212121',
-  A100: '#f5f5f5',
-  A200: '#eeeeee',
-  A400: '#bdbdbd',
+  A100: '#d5d5d5',
+  A200: '#aaaaaa',
+  A400: '#303030',
   A700: '#616161',
 }
 
@@ -122,35 +124,19 @@ const green = {
   A700: '#00c853',
 }
 
-export type ColorType = {
-  50: string
-  100: string
-  200: string
-  300: string
-  400: string
-  500: string
-  600: string
-  700: string
-  800: string
-  900: string
-  A100: string
-  A200: string
-  A400: string
-  A700: string
-}
-
+// ToDo: Move it to themTypes.ts file ?
 export type Colors = {
   common: {
     black: string
     white: string
   }
-  grey: ColorType
-  purple: ColorType
-  red: ColorType
-  orange: ColorType
-  blue: ColorType
-  lightBlue: ColorType
-  green: ColorType
+  grey: Color
+  purple: Color
+  red: Color
+  orange: Color
+  blue: Color
+  lightBlue: Color
+  green: Color
 }
 
 const colors: Colors = {

@@ -72,13 +72,12 @@ Warning.args = {
 
 export const Danger = Template.bind({})
 Danger.args = {
-  variant: CommonColors.danger,
+  variant: CommonColors.error,
   children: 'Danger',
 }
 
 export const Disabled = Template.bind({})
 Disabled.args = {
-  variant: CommonColors.danger,
   disabled: true,
   children: 'Disabled',
 }

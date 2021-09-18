@@ -48,6 +48,11 @@ export type Theme = {
   }
 }
 
+export type DisabledPaletteColor = {
+  main: string
+  contrastText: string
+}
+
 /**
  * Types Referred from material-ui
  */
@@ -139,6 +144,7 @@ export type TypeDivider = string
 export interface PaletteOptions {
   common?: Partial<CommonColors>
   mode?: PALETTE_MODE
+  default?: PaletteColorOptions
   primary?: PaletteColorOptions
   secondary?: PaletteColorOptions
   error?: PaletteColorOptions
@@ -157,6 +163,7 @@ export interface PaletteOptions {
 }
 
 export type CommonPalette = {
+  default: PaletteColor
   primary: PaletteColor
   secondary: PaletteColor
   error: PaletteColor
@@ -166,9 +173,11 @@ export type CommonPalette = {
 }
 
 export interface Palette extends CommonPalette {
-  common?: CommonColors
-  mode?: PALETTE_MODE
+  common: CommonColors
+  mode: PALETTE_MODE
+  // ToDo: `grey` is optional-type ?
   grey?: Color
+  disabled: DisabledPaletteColor
   // text?: TypeText
   // ToDo: CommonVariant.contained is required ?
   [CommonVariant.contained]: CommonPalette

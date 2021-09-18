@@ -106,51 +106,50 @@ const Template: ComponentStory<typeof Button> = (args) => {
   )
 }
 
-// export const Default = Template.bind({})
-// Default.args = {
-//   color: CommonColors.default,
-//   children: 'Default',
-// }
+export const Default = Template.bind({})
+Default.args = {
+  color: CommonColors.default,
+  children: 'DEFAULT',
+}
 
 export const Primary = Template.bind({})
 Primary.args = {
   color: CommonColors.primary,
-  children: 'Primary',
+  children: 'PRIMARY',
 }
 
 export const Secondary = Template.bind({})
 Secondary.args = {
   color: CommonColors.secondary,
-  children: 'Secondary',
+  children: 'SECONDARY',
 }
 
 export const Success = Template.bind({})
 Success.args = {
   color: CommonColors.success,
-  children: 'Success',
+  children: 'SUCCESS',
 }
 
 export const Warning = Template.bind({})
 Warning.args = {
   color: CommonColors.warning,
-  children: 'Warning',
+  children: 'WARNING',
 }
 
 export const Error = Template.bind({})
 Error.args = {
   color: CommonColors.error,
-  children: 'Error',
+  children: 'ERROR',
 }
 
 export const Info = Template.bind({})
 Info.args = {
   color: CommonColors.info,
-  children: 'Info',
+  children: 'INFO',
 }
 
 export const Disabled = Template.bind({})
 Disabled.args = {
-  color: CommonColors.disabled,
   disabled: true,
-  children: 'Disabled',
+  children: 'DISABLED',
 }

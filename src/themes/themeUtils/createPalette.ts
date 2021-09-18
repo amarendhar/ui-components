@@ -3,6 +3,7 @@ import {
   PaletteOptions,
   PALETTE_MODE,
   Palette,
+  Color,
 } from 'themes/themTypes'
 import { CommonVariant } from 'types'
 import colors from '../colors'
@@ -33,9 +34,11 @@ export const light = {
     // The most important text.
     primary: 'rgba(0, 0, 0, 0.87)',
     // Secondary text.
-    secondary: 'rgba(0, 0, 0, 0.6)',
+    secondary: 'rgba(0, 0, 0, 0.54)',
     // Disabled text have even lower visual prominence.
     disabled: 'rgba(0, 0, 0, 0.38)',
+    // Text hints.
+    hint: 'rgba(0, 0, 0, 0.38)',
   },
   // The color used to divide different elements.
   divider: 'rgba(0, 0, 0, 0.12)',
@@ -43,7 +46,7 @@ export const light = {
   // Consistency between these values is important.
   background: {
     paper: colors.common.white,
-    default: colors.common.white,
+    default: colors.grey[50],
   },
   // The colors used to style the action elements.
   action: {
@@ -78,8 +81,8 @@ export const dark = {
   },
   divider: 'rgba(255, 255, 255, 0.12)',
   background: {
-    paper: '#121212',
-    default: '#121212',
+    paper: colors.grey[800],
+    default: '#303030',
   },
   action: {
     active: colors.common.white,
@@ -143,12 +146,39 @@ const getColorStates = (color: string): PaletteColor => {
   }
 }
 
+const getDefaultColorStates = (color: Color): PaletteColor => {
+  return {
+    main: color[300],
+    light: color[500],
+    dark: color.A100,
+    contrastText: getContrastText(color[300]),
+  }
+}
+
+const getDefaultColorStatesForOutlined = (color: string): PaletteColor => {
+  return {
+    main: color,
+    light: alpha(color, 0.04),
+    dark: alpha(color, 0.28),
+    contrastText: alpha(color, 0.23),
+  }
+}
+
 const getColorStatesForOutlined = (color: string): PaletteColor => {
   return {
     main: color,
     light: alpha(color, 0.04),
     dark: alpha(color, 0.32),
     contrastText: alpha(color, 0.5),
+  }
+}
+
+const getDefaultColorStatesForText = (color: string): PaletteColor => {
+  return {
+    main: color,
+    light: alpha(color, 0.04),
+    dark: alpha(color, 0.28),
+    contrastText: alpha(color, 0.23),
   }
 }
 
@@ -168,6 +198,8 @@ const createPalette = (palette: PaletteOptions = {}): Palette => {
   const mode = palette?.mode || PALETTE_MODE.LIGHT
   const {
     primary = mode === PALETTE_MODE.DARK ? colors.blue[200] : colors.blue[700],
+    // ToDo: using key-name `default` is giving TypeScript-Error, may be it's reserved-key not to use.
+    // default = colors.grey[300],
     secondary = mode === PALETTE_MODE.DARK
       ? colors.purple[200]
       : colors.purple[500],
@@ -198,6 +230,7 @@ const createPalette = (palette: PaletteOptions = {}): Palette => {
     // The palette mode, can be light or dark.
     mode,
     // The colors used to represent primary interface elements for a user.
+    default: getDefaultColorStates(colors.grey),
     primary: getColorStates(primary),
     secondary: getColorStates(secondary),
     error: getColorStates(error),
@@ -207,6 +240,7 @@ const createPalette = (palette: PaletteOptions = {}): Palette => {
     disabled,
     // ToDo: CommonVariant.contained is required ?
     [CommonVariant.contained]: {
+      default: getDefaultColorStates(colors.grey),
       primary: getColorStates(primary),
       secondary: getColorStates(secondary),
       error: getColorStates(error),
@@ -215,6 +249,7 @@ const createPalette = (palette: PaletteOptions = {}): Palette => {
       warning: getColorStates(warning),
     },
     [CommonVariant.outlined]: {
+      default: getDefaultColorStatesForOutlined('#000000'),
       primary: getColorStatesForOutlined(primary),
       secondary: getColorStatesForOutlined(secondary),
       error: getColorStatesForOutlined(error),
@@ -223,6 +258,7 @@ const createPalette = (palette: PaletteOptions = {}): Palette => {
       warning: getColorStatesForOutlined(warning),
     },
     [CommonVariant.text]: {
+      default: getDefaultColorStatesForText('#000000'),
       primary: getColorStatesForText(primary),
       secondary: getColorStatesForText(secondary),
       error: getColorStatesForText(error),
