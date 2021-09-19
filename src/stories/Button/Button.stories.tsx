@@ -1,7 +1,7 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Flex, Text } from 'rebass'
 import { Button } from './index'
+import { FlexContainer } from 'stories/storyStyles'
 import { CommonColors, CommonSizes, CommonVariant } from 'types'
 
 export default {
@@ -19,41 +19,13 @@ export default {
 const Template: ComponentStory<typeof Button> = (args) => {
   return (
     <>
-      <Text
-        sx={{
-          fontWeight: 'bold',
-          marginBottom: '10px',
-        }}
-      >
-        Contained
-      </Text>
-      <Flex
-        mb={10}
-        alignItems="center"
-        sx={{
-          gap: 10,
-        }}
-      >
+      <FlexContainer label="Contained">
         <Button {...args} size={CommonSizes.small} />
         <Button {...args} size={CommonSizes.medium} />
         <Button {...args} size={CommonSizes.large} />
-      </Flex>
+      </FlexContainer>
 
-      <Text
-        sx={{
-          fontWeight: 'bold',
-          marginBottom: '10px',
-        }}
-      >
-        Outlined
-      </Text>
-      <Flex
-        mb={10}
-        alignItems="center"
-        sx={{
-          gap: 10,
-        }}
-      >
+      <FlexContainer label="Outlined">
         <Button
           {...args}
           size={CommonSizes.small}
@@ -69,23 +41,9 @@ const Template: ComponentStory<typeof Button> = (args) => {
           size={CommonSizes.large}
           variant={CommonVariant.outlined}
         />
-      </Flex>
+      </FlexContainer>
 
-      <Text
-        sx={{
-          fontWeight: 'bold',
-          marginBottom: '10px',
-        }}
-      >
-        Text
-      </Text>
-      <Flex
-        mb={10}
-        alignItems="center"
-        sx={{
-          gap: 10,
-        }}
-      >
+      <FlexContainer label="Text">
         <Button
           {...args}
           size={CommonSizes.small}
@@ -101,7 +59,7 @@ const Template: ComponentStory<typeof Button> = (args) => {
           size={CommonSizes.large}
           variant={CommonVariant.text}
         />
-      </Flex>
+      </FlexContainer>
     </>
   )
 }
@@ -109,47 +67,47 @@ const Template: ComponentStory<typeof Button> = (args) => {
 export const Default = Template.bind({})
 Default.args = {
   color: CommonColors.default,
-  children: 'DEFAULT',
+  children: 'Default',
 }
 
 export const Primary = Template.bind({})
 Primary.args = {
   color: CommonColors.primary,
-  children: 'PRIMARY',
+  children: 'Primary',
 }
 
 export const Secondary = Template.bind({})
 Secondary.args = {
   color: CommonColors.secondary,
-  children: 'SECONDARY',
+  children: 'Secondary',
 }
 
 export const Success = Template.bind({})
 Success.args = {
   color: CommonColors.success,
-  children: 'SUCCESS',
+  children: 'Success',
 }
 
 export const Warning = Template.bind({})
 Warning.args = {
   color: CommonColors.warning,
-  children: 'WARNING',
+  children: 'Warning',
 }
 
 export const Error = Template.bind({})
 Error.args = {
   color: CommonColors.error,
-  children: 'ERROR',
+  children: 'Error',
 }
 
 export const Info = Template.bind({})
 Info.args = {
   color: CommonColors.info,
-  children: 'INFO',
+  children: 'Info',
 }
 
 export const Disabled = Template.bind({})
 Disabled.args = {
   disabled: true,
-  children: 'DISABLED',
+  children: 'Disabled',
 }

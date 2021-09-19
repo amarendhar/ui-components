@@ -1,6 +1,6 @@
 import {
   CSSObject,
-  CSSProp,
+  // CSSProp,
   // CSSKeyframes,
   // CSSProperties,
   // CSSPseudos
@@ -10,7 +10,7 @@ import { Theme } from 'themes/themTypes'
 
 // type VariantStyle = {
 //   // ToDo: this should be StyledProps
-//   [type in string]: any
+//   [key: string]: any
 // }
 
 type VariantStyle = {
@@ -20,13 +20,17 @@ type VariantStyle = {
    *  so using `CSSObject` for now.
    * Go to type-definition of `CSSProp` & check notes in the comments-section in styled-components library for more information.
    */
-  [type in string]: CSSObject
-  // [type in string]: CSSObject | CSSProp
-  // [type in string]: VariantStyle
+  [key: string]: CSSObject
+  // [key: string]: CSSObject | CSSProp
+  // [key: string]: VariantStyle
 }
 
 type getStyleProps = {
-  [type in string]: VariantStyle
+  [key in string]: VariantStyle
+} & {
+  color?: VariantStyle
+  variant?: VariantStyle
+  size?: VariantStyle
 }
 
 /**
