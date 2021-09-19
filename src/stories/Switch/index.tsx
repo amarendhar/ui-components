@@ -39,19 +39,9 @@ export const SwitchBox = ({
     <Container
       data-testid={restProps['data-testid']}
       className={`container ${className}`}
-      onClick={() => {
-        if (disabled) {
-          return
-        }
-
-        toggleChecked((v) => {
-          onChange(!v)
-          return !v
-        })
-      }}
       disabled={disabled}
     >
-      <SwitchContainer
+      <SwitchTrack
         color={color}
         variant={variant}
         size={size}
@@ -60,8 +50,22 @@ export const SwitchBox = ({
           disabled: disabled,
         })}
       >
-        <Switch size={size} checked={checked} />
-      </SwitchContainer>
+        <SwitchThumb size={size} checked={checked} />
+        <Input
+          type="checkbox"
+          checked={checked}
+          onChange={() => {
+            if (disabled) {
+              return
+            }
+
+            toggleChecked((v) => {
+              onChange(!v)
+              return !v
+            })
+          }}
+        />
+      </SwitchTrack>
       {children && <Label disabled={disabled}>{children}</Label>}
     </Container>
   )
@@ -80,14 +84,14 @@ const Container = styled.div<{ disabled: boolean }>`
   }
 `
 
-type SwitchContainerProps = {
+type SwitchTrackProps = {
   color: CommonColors
   variant: CommonVariant
   size: CommonSizes
   checked: boolean
 }
 
-const switchContainerVariants = getStyles<SwitchContainerProps>((props) => {
+const switchTrackVariants = getStyles<SwitchTrackProps>((props) => {
   const {
     theme: { palette },
     color,
@@ -134,21 +138,33 @@ const switchContainerVariants = getStyles<SwitchContainerProps>((props) => {
   }
 })
 
-const SwitchContainer = styled.span<SwitchContainerProps>`
+const SwitchTrack = styled.span<SwitchTrackProps>`
+  position: relative;
   display: flex;
   align-items: center;
   border-radius: 34px;
   transition: 0.4s;
 
-  ${switchContainerVariants}
+  ${switchTrackVariants}
 `
 
-type SwitchProps = {
+const Input = styled.input`
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+`
+
+type SwitchThumbProps = {
   size: CommonSizes
   checked: boolean
 }
 
-const switchVariants = getStyles<SwitchProps>(({ checked }) => {
+const switchThumbVariants = getStyles<SwitchThumbProps>(({ checked }) => {
   return {
     size: {
       small: {
@@ -170,12 +186,12 @@ const switchVariants = getStyles<SwitchProps>(({ checked }) => {
   }
 })
 
-const Switch = styled.span<SwitchProps>`
+const SwitchThumb = styled.span<SwitchThumbProps>`
   background-color: white;
   border-radius: 50%;
   transition: 0.4s;
 
-  ${switchVariants}
+  ${switchThumbVariants}
 `
 
 const Label = styled.span<{ disabled: boolean }>`

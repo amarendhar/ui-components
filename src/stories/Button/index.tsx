@@ -41,7 +41,7 @@ export const Button = ({
 
 export default Button
 
-type ButtonStyledProps = {
+type ButtonContainerProps = {
   color: CommonColors
   variant: CommonVariant
   size: CommonSizes
@@ -63,7 +63,7 @@ type ButtonStyledProps = {
  *  Here in the above example `getColor-Function` is `Styled-Function`.
  *  Here in `function <T>(props: T)`, the type `T` should be `Styled-Function` return-type.
  */
-const buttonVariants = getStyles<ButtonStyledProps>((props) => {
+const buttonContainerVariants = getStyles<ButtonContainerProps>((props) => {
   const {
     theme: { palette, fontSize },
     color,
@@ -145,10 +145,10 @@ const buttonVariants = getStyles<ButtonStyledProps>((props) => {
 })
 
 /**
- * ToDo: `line-height: 1.7` is suggested from Material-UI,
+ * ToDo: `line-height: 1.7` is suggested by Material-UI,
  *  but is it really required ??
  */
-const ButtonContainer = styled.button<ButtonStyledProps>`
+const ButtonContainer = styled.button<ButtonContainerProps>`
   position: relative;
   box-sizing: border-box;
   cursor: pointer;
@@ -159,7 +159,7 @@ const ButtonContainer = styled.button<ButtonStyledProps>`
   border-radius: ${({ theme }) => theme.space.small}px;
   transition: all 300ms ease 0s;
 
-  ${buttonVariants}
+  ${buttonContainerVariants}
 `
 
 const Label = styled.span``

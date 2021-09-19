@@ -1,12 +1,13 @@
 import { CommonVariant, CustomObjType, ObjType } from 'types'
 
-// ToDo: Remove this, this is old type
+// ToDo: Remove it, this is old type
 export type oldColorPalette = {
   bg: ObjType
   border: ObjType
   text: ObjType
 }
 
+// ToDo: Remove it, this is old type
 export type oldColors = {
   white: ObjType
   blue: ObjType

@@ -25,13 +25,26 @@ type VariantStyle = {
   // [key: string]: VariantStyle
 }
 
-type getStyleProps = {
-  [key in string]: VariantStyle
-} & {
-  color?: VariantStyle
-  variant?: VariantStyle
-  size?: VariantStyle
-}
+type getStyleTypes = 'color' | 'variant' | 'size' | string
+
+/**
+ *  Case-1:
+ *    type getStyleProps = {
+ *      color?: VariantStyle
+ *      variant?: VariantStyle
+ *      size?: VariantStyle
+ *    } & {
+ *      [key in string]: VariantStyle
+ *    }
+ *
+ *  Case-2:
+ *    type getStyleProps = Record<getStyleTypes, VariantStyle>
+ *
+ * Here Case-1 & Case-2 both are valid,
+ *  Case-1 is more basic way of declaration.
+ *  Case-2 is more optimized way of declaration.
+ */
+type getStyleProps = Record<getStyleTypes, VariantStyle>
 
 /**
  * Note: Use function instead of arrow-function,
@@ -64,8 +77,12 @@ type getStyleProps = {
  */
 // ToDo: replace 'any' with styledObjectProps/reactProps
 // Note: Here `cbProps` is nothing but `reactComponentProps`
-const getStyles = <P>(cb: (cbProps: { theme: Theme } & P) => getStyleProps) => {
-  return (reactComponentProps: any) => {
+const getStyles = <P>(
+  cb: (cbProps: { theme: Theme } & P & { [key: string]: any }) => getStyleProps
+) => {
+  return (
+    reactComponentProps: { theme: Theme } & P & { [key: string]: any }
+  ) => {
     const props = cb(reactComponentProps)
     let styles = {}
 
@@ -87,11 +104,27 @@ const getStyles = <P>(cb: (cbProps: { theme: Theme } & P) => getStyleProps) => {
 export default getStyles
 
 /**
-  Example usage:
-  --------------------------------------------------
-  
-  const sizeVariants = getStyles(
-    {
+--------------------------------------------------------------------------------------------
+Example-1:  Usage example
+--------------------------------------------------------------------------------------------
+  type ButtonProps = {
+    color: string
+  }
+
+  const Button = ({ color = '#FF0000' }: ButtonProps) => {
+    return (
+      <button color={color}>Click Me</button>
+    )
+  }
+
+  type ButtonContainerProps = {
+    color: string
+  }
+
+  const buttonContainerVariants = getStyles<ButtonContainerProps>((props) => {
+    const { color } = props
+    
+    return {
       // props
       size: { // type -> size
         // variants
@@ -99,16 +132,19 @@ export default getStyles
           // variantStyle
           width: 28,
           height: 14,
+          border: `1px solid ${color}`,
         },
         medium: { // variantName -> 'medium'
           // variantStyle
           width: 33,
           height: 18,
+          border: `1px solid ${color}`,
         },
         large: { // variantName -> 'large'
           // variantStyle
           width: 45,
           height: 21,
+          border: `1px solid ${color}`,
         },
       },
       variant: { // type -> variant
@@ -133,39 +169,54 @@ export default getStyles
         }
       }
     }
-  )
+  })
+  
+  Button = styled.button<ButtonContainerProps>`
+    display: flex;
+    ${buttonContainerVariants}
+  `
 
-  const transformVariants = getStyles({
-    size: {
-      small: {
-        width: 10,
-        height: 10,
-        transform: 'translateX(3px)',
-        '&.checked': {
-          transform: 'translateX(15px)',
+--------------------------------------------------------------------------------------------
+Example-2:  Usage example
+--------------------------------------------------------------------------------------------
+  type SwitchBoxProps = {
+    checked?: boolean
+  }
+  
+  const SwitchBox = ({ checked = false }: SwitchBoxProps) => {
+    return (
+      <Switch checked={checked} />
+    )
+  }
+
+  type SwitchProps = {
+    checked: boolean
+  }
+  
+  const switchVariants = getStyles<SwitchProps>((props) => {
+    return {
+      size: {
+        small: {
+          width: 10,
+          height: 10,
+          transform: checked ? 'translateX(15px)' : 'translateX(3px)',
+        },
+        medium: {
+          width: 12,
+          height: 12,
+          transform: checked ? 'translateX(18px)' : 'translateX(3px)',
+        },
+        large: {
+          width: 15,
+          height: 15,
+          transform: checked ? 'translateX(27px)' : 'translateX(3px)',
         },
       },
-      medium: {
-        width: 12,
-        height: 12,
-        transform: 'translateX(3px)',
-        '&.checked': {
-          transform: 'translateX(18px)',
-        },
-      },
-      large: {
-        width: 15,
-        height: 15,
-        transform: 'translateX(3px)',
-        '&.checked': {
-          transform: 'translateX(27px)',
-        },
-      },
-    },
+    }
   })
 
-  Button = styled.button`
-    ${sizeVariants}
-    ${transformVariants}
+  Switch = styled.button<SwitchProps>`
+    display: flex;
+    ${switchVariants}
   `
  */
