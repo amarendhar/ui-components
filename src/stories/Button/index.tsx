@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { createPalette, getStyles } from 'themes/themeUtils'
+import { getStyles } from 'themes/themeUtils'
 import { CommonColors, CommonSizes, CommonVariant } from 'types'
-
-console.log(createPalette())
 
 type ButtonProps = {
   color?: CommonColors
