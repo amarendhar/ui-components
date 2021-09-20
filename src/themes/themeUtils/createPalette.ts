@@ -5,7 +5,7 @@ import {
   Palette,
   Color,
 } from 'themes/themTypes'
-import { CommonVariant } from 'types'
+import { CommonVariants } from 'themes/themTypes'
 import colors from '../colors'
 import {
   decomposeColor,
@@ -238,8 +238,8 @@ const createPalette = (palette: PaletteOptions = {}): Palette => {
     success: getColorStates(success),
     warning: getColorStates(warning),
     disabled,
-    // ToDo: CommonVariant.contained is required ?
-    [CommonVariant.contained]: {
+    // ToDo: CommonVariants.contained is required ?
+    [CommonVariants.contained]: {
       default: getDefaultColorStates(colors.grey),
       primary: getColorStates(primary),
       secondary: getColorStates(secondary),
@@ -248,7 +248,7 @@ const createPalette = (palette: PaletteOptions = {}): Palette => {
       success: getColorStates(success),
       warning: getColorStates(warning),
     },
-    [CommonVariant.outlined]: {
+    [CommonVariants.outlined]: {
       default: getDefaultColorStatesForOutlined('#000000'),
       primary: getColorStatesForOutlined(primary),
       secondary: getColorStatesForOutlined(secondary),
@@ -257,7 +257,7 @@ const createPalette = (palette: PaletteOptions = {}): Palette => {
       success: getColorStatesForOutlined(success),
       warning: getColorStatesForOutlined(warning),
     },
-    [CommonVariant.text]: {
+    [CommonVariants.text]: {
       default: getDefaultColorStatesForText('#000000'),
       primary: getColorStatesForText(primary),
       secondary: getColorStatesForText(secondary),

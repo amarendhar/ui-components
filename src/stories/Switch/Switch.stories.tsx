@@ -2,7 +2,7 @@ import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { SwitchBox } from './index'
 import { FlexContainer } from 'stories/storyStyles'
-import { CommonColors, CommonSizes } from 'types'
+import { CommonColors, CommonSizes } from 'themes/themTypes'
 
 export default {
   title: 'Components/SwitchBox',

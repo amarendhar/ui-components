@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { createClassName } from 'utils/helpers'
 import { getStyles } from 'themes/themeUtils'
-import { CommonColors, CommonSizes, CommonVariant } from 'types'
+import { CommonColors, CommonSizes, CommonVariants } from 'themes/themTypes'
 
 type SwitchBoxProps = {
   color?: CommonColors
-  variant?: CommonVariant.contained
+  variant?: CommonVariants.contained
   size?: CommonSizes
   'data-testid'?: string
   className?: string
@@ -18,8 +18,8 @@ type SwitchBoxProps = {
 }
 
 export const SwitchBox = ({
-  color = CommonColors.default,
-  variant = CommonVariant.contained,
+  color = CommonColors.primary,
+  variant = CommonVariants.contained,
   size = CommonSizes.medium,
   className = '',
   onChange = () => {},
@@ -86,7 +86,7 @@ const Container = styled.div<{ disabled: boolean }>`
 
 type SwitchTrackProps = {
   color: CommonColors
-  variant: CommonVariant
+  variant: CommonVariants
   size: CommonSizes
   checked: boolean
 }
@@ -118,7 +118,7 @@ const switchTrackVariants = getStyles<SwitchTrackProps>((props) => {
       },
     },
     variant: {
-      [CommonVariant.contained]: {
+      [CommonVariants.contained]: {
         backgroundColor: main,
         border: `1px solid ${main}`,
         '&:hover': {
@@ -148,7 +148,7 @@ const SwitchTrack = styled.span<SwitchTrackProps>`
   ${switchTrackVariants}
 `
 
-const Input = styled.input`
+const Input = styled.input<{ checked: boolean }>`
   position: absolute;
   left: 0;
   right: 0;

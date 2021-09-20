@@ -1,4 +1,4 @@
-import { CommonVariant, CustomObjType, ObjType } from 'types'
+import { CustomObjType, ObjType } from 'types'
 
 // ToDo: Remove it, this is old type
 export type oldColorPalette = {
@@ -55,6 +55,36 @@ export type DisabledPaletteColor = {
 }
 
 /**
+ * Variants referred from react-bootstrap
+ *  https://react-bootstrap.github.io/components/buttons/
+ */
+
+ export enum CommonColors {
+  // ToDo: is default-type required ?
+  default = 'default',
+  primary = 'primary',
+  secondary = 'secondary',
+  error = 'error',
+  info = 'info',
+  success = 'success',
+  warning = 'warning',
+  // ToDo: is disable-type required ?
+  // disabled = 'disabled',
+}
+
+export enum CommonSizes {
+  small = 'small',
+  medium = 'medium',
+  large = 'large',
+}
+
+export enum CommonVariants {
+  contained = 'contained',
+  outlined = 'outlined',
+  text = 'text',
+}
+
+/**
  * Types Referred from material-ui
  */
 export enum PALETTE_MODE {
@@ -81,7 +111,7 @@ export interface Color {
 
 // use standalone interface over typeof colors/commons
 // to enable module augmentation
-export interface CommonColors {
+export interface CommonPaletteColors {
   black: string
   white: string
 }
@@ -143,7 +173,7 @@ export interface TypeBackground {
 export type TypeDivider = string
 
 export interface PaletteOptions {
-  common?: Partial<CommonColors>
+  common?: Partial<CommonPaletteColors>
   mode?: PALETTE_MODE
   default?: PaletteColorOptions
   primary?: PaletteColorOptions
@@ -174,16 +204,16 @@ export type CommonPalette = {
 }
 
 export interface Palette extends CommonPalette {
-  common: CommonColors
+  common: CommonPaletteColors
   mode: PALETTE_MODE
   // ToDo: `grey` is optional-type ?
   grey?: Color
   disabled: DisabledPaletteColor
   // text?: TypeText
-  // ToDo: CommonVariant.contained is required ?
-  [CommonVariant.contained]: CommonPalette
-  [CommonVariant.outlined]: CommonPalette
-  [CommonVariant.text]: CommonPalette
+  // ToDo: CommonVariants.contained is required ?
+  [CommonVariants.contained]: CommonPalette
+  [CommonVariants.outlined]: CommonPalette
+  [CommonVariants.text]: CommonPalette
   // contrastThreshold: number;
   // tonalOffset: PaletteTonalOffset;
   // divider: TypeDivider;

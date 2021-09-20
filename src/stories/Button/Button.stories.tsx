@@ -2,7 +2,7 @@ import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Button } from './index'
 import { FlexContainer } from 'stories/storyStyles'
-import { CommonColors, CommonSizes, CommonVariant } from 'types'
+import { CommonColors, CommonSizes, CommonVariants } from 'themes/themTypes'
 
 export default {
   title: 'Components/Button',
@@ -29,17 +29,17 @@ const Template: ComponentStory<typeof Button> = (args) => {
         <Button
           {...args}
           size={CommonSizes.small}
-          variant={CommonVariant.outlined}
+          variant={CommonVariants.outlined}
         />
         <Button
           {...args}
           size={CommonSizes.medium}
-          variant={CommonVariant.outlined}
+          variant={CommonVariants.outlined}
         />
         <Button
           {...args}
           size={CommonSizes.large}
-          variant={CommonVariant.outlined}
+          variant={CommonVariants.outlined}
         />
       </FlexContainer>
 
@@ -47,17 +47,17 @@ const Template: ComponentStory<typeof Button> = (args) => {
         <Button
           {...args}
           size={CommonSizes.small}
-          variant={CommonVariant.text}
+          variant={CommonVariants.text}
         />
         <Button
           {...args}
           size={CommonSizes.medium}
-          variant={CommonVariant.text}
+          variant={CommonVariants.text}
         />
         <Button
           {...args}
           size={CommonSizes.large}
-          variant={CommonVariant.text}
+          variant={CommonVariants.text}
         />
       </FlexContainer>
     </>

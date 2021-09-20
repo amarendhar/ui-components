@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { getStyles } from 'themes/themeUtils'
-import { CommonColors, CommonSizes, CommonVariant } from 'types'
+import { CommonColors, CommonSizes, CommonVariants } from 'themes/themTypes'
 
 type ButtonProps = {
   color?: CommonColors
-  variant?: CommonVariant
+  variant?: CommonVariants
   size?: CommonSizes
   'data-testid'?: string
   className?: string
@@ -16,7 +16,7 @@ type ButtonProps = {
 
 export const Button = ({
   color = CommonColors.primary,
-  variant = CommonVariant.contained,
+  variant = CommonVariants.contained,
   size = CommonSizes.medium,
   className = '',
   onClick = () => {},
@@ -43,7 +43,7 @@ export default Button
 
 type ButtonContainerProps = {
   color: CommonColors
-  variant: CommonVariant
+  variant: CommonVariants
   size: CommonSizes
 }
 
@@ -88,7 +88,7 @@ const buttonContainerVariants = getStyles<ButtonContainerProps>((props) => {
       },
     },
     variant: {
-      [CommonVariant.contained]: {
+      [CommonVariants.contained]: {
         backgroundColor: main,
         border: `1px solid ${main}`,
         color: contrastText,
@@ -107,7 +107,7 @@ const buttonContainerVariants = getStyles<ButtonContainerProps>((props) => {
           pointerEvents: 'none',
         },
       },
-      [CommonVariant.outlined]: {
+      [CommonVariants.outlined]: {
         backgroundColor: 'transparent',
         border: `1px solid ${contrastText}`,
         color: main,
@@ -125,7 +125,7 @@ const buttonContainerVariants = getStyles<ButtonContainerProps>((props) => {
           pointerEvents: 'none',
         },
       },
-      [CommonVariant.text]: {
+      [CommonVariants.text]: {
         backgroundColor: 'transparent',
         border: '1px solid transparent',
         color: main,
