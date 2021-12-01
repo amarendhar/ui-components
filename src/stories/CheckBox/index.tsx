@@ -4,7 +4,7 @@ import { createClassName } from 'utils/helpers'
 import { getStyles } from 'themes/themeUtils'
 import { CommonColors, CommonSizes, CommonVariants } from 'themes/themTypes'
 
-type SwitchBoxProps = {
+type CheckBoxProps = {
   color?: CommonColors
   variant?: CommonVariants.contained
   size?: CommonSizes
@@ -17,7 +17,11 @@ type SwitchBoxProps = {
   children: React.ReactNode
 }
 
-const SwitchBox = ({
+/**
+ * ToDo: Add test-cases.
+ * ToDo: Add `indeterminate` type, refer `https://v4.mui.com/components/checkboxes/`.
+ */
+const CheckBox = ({
   color = CommonColors.primary,
   variant = CommonVariants.contained,
   size = CommonSizes.medium,
@@ -28,9 +32,36 @@ const SwitchBox = ({
   disabled = false,
   children,
   ...restProps
-}: SwitchBoxProps) => {
+}: CheckBoxProps) => {
   const [checked, toggleChecked] = useState(defaultValue)
   const isMounted = useRef(false)
+
+  // useEffect(() => {
+  //   // componentDidMount & componentDidUpdate
+  //
+  //   if (!isMounted.current) {
+  //     // componentDidMount
+  //     isMounted.current = true
+  //   } else {
+  //     // componentDidUpdate
+  //   }
+  // })
+
+  // useEffect(() => {
+  //   // componentDidMount
+  //   isMounted.current = true
+
+  //   return () => {
+  //     // componentWillUnmount
+  //     isMounted.current = false
+  //   }
+  // }, [])
+
+  // useEffect(() => {
+  //   if (isMounted.current) {
+  //     toggleChecked(value)
+  //   }
+  // }, [value])
 
   useEffect(() => {
     if (!isMounted.current) {
@@ -46,7 +77,7 @@ const SwitchBox = ({
       className={`container ${className}`}
       disabled={disabled}
     >
-      <SwitchTrack
+      <CheckTrack
         color={color}
         variant={variant}
         size={size}
@@ -55,7 +86,7 @@ const SwitchBox = ({
           disabled: disabled,
         })}
       >
-        <SwitchThumb size={size} checked={checked} />
+        <CheckThumb size={size} checked={checked} />
         <Input
           type="checkbox"
           checked={checked}
@@ -68,13 +99,13 @@ const SwitchBox = ({
             onChange(!checked)
           }}
         />
-      </SwitchTrack>
+      </CheckTrack>
       {children && <Label disabled={disabled}>{children}</Label>}
     </Container>
   )
 }
 
-export default SwitchBox
+export default CheckBox
 
 const Container = styled.label<{ disabled: boolean }>`
   display: flex;
@@ -87,74 +118,73 @@ const Container = styled.label<{ disabled: boolean }>`
   }
 `
 
-type SwitchTrackProps = {
+type CheckTrackProps = {
   color: CommonColors
   variant: CommonVariants
   size: CommonSizes
   checked: boolean
 }
 
-const switchTrackVariants = getStyles<SwitchTrackProps>((props) => {
+const checkTrackVariants = getStyles<CheckTrackProps>((props) => {
   const {
     theme: { palette },
     color,
     variant,
     checked,
   } = props
-  const { main, dark, light } = !checked
-    ? palette[variant][CommonColors.default]
-    : palette[variant][color]
+  const { main, dark, light } = palette[variant][color]
 
   return {
     size: {
       [CommonSizes.small]: {
-        width: 28,
-        height: 14,
+        width: 12,
+        height: 12,
       },
       [CommonSizes.medium]: {
-        width: 33,
-        height: 18,
+        width: 16,
+        height: 16,
       },
       [CommonSizes.large]: {
-        width: 45,
-        height: 21,
+        width: 20,
+        height: 20,
       },
     },
     variant: {
       [CommonVariants.contained]: {
-        backgroundColor: main,
-        border: `1px solid ${main}`,
+        backgroundColor: checked ? main : 'transparent',
+        border: `2px solid ${main}`,
         '&:hover': {
-          backgroundColor: dark,
-          border: `1px solid ${dark}`,
+          backgroundColor: checked ? dark : 'transparent',
+          border: `2px solid ${dark}`,
         },
         '&:active': {
-          backgroundColor: light,
-          border: `1px solid ${light}`,
+          backgroundColor: checked ? light : 'transparent',
+          border: `2px solid ${light}`,
         },
         '&.disabled': {
           backgroundColor: palette.disabled.main,
-          border: '1px solid transparent',
+          border: `2px solid transparent`,
         },
       },
     },
   }
 })
 
-const SwitchTrack = styled.span<SwitchTrackProps>`
+const CheckTrack = styled.span<CheckTrackProps>`
   position: relative;
   display: flex;
   align-items: center;
-  border-radius: 34px;
-  transition: 0.4s;
+  justify-content: center;
+  border-radius: 3px;
+  transition: 0.2s;
 
-  ${switchTrackVariants}
+  ${checkTrackVariants}
 `
 
-const Input = styled.input<{ checked: boolean }>`
+const Input = styled.input`
   position: absolute;
+  top: 0;
   left: 0;
-  right: 0;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -162,44 +192,47 @@ const Input = styled.input<{ checked: boolean }>`
   opacity: 0;
 `
 
-type SwitchThumbProps = {
+type CheckThumbProps = {
   size: CommonSizes
   checked: boolean
 }
 
-const switchThumbVariants = getStyles<SwitchThumbProps>(({ checked }) => {
+const checkThumbVariants = getStyles<CheckThumbProps>(({ checked }) => {
   return {
     size: {
       small: {
-        width: 10,
-        height: 10,
-        transform: checked ? 'translateX(15px)' : 'translateX(3px)',
+        width: 4,
+        height: 8,
+        marginTop: -2,
       },
       medium: {
-        width: 12,
-        height: 12,
-        transform: checked ? 'translateX(18px)' : 'translateX(3px)',
+        width: 5,
+        height: 11,
+        marginTop: -3,
       },
       large: {
-        width: 15,
-        height: 15,
-        transform: checked ? 'translateX(27px)' : 'translateX(3px)',
+        width: 6,
+        height: 12,
+        marginTop: -4,
       },
     },
   }
 })
 
-const SwitchThumb = styled.span<SwitchThumbProps>`
-  background-color: white;
-  border-radius: 50%;
-  transition: 0.4s;
+const CheckThumb = styled.span<CheckThumbProps>`
+  border-bottom: 2px solid ${({ theme }) => theme.palette.common.white};
+  border-right: 2px solid ${({ theme }) => theme.palette.common.white};
+  transform: rotate(40deg);
+  transition: 0.2s;
+  opacity: ${({ checked }) => (checked ? 1 : 0)};
 
-  ${switchThumbVariants}
+  ${checkThumbVariants}
 `
 
 const Label = styled.span<{ disabled: boolean }>`
   margin-left: 8px;
   user-select: none;
+
   color: ${(props) =>
     props.disabled ? props.theme.palette.disabled.contrastText : ''};
 `

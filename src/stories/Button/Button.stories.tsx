@@ -1,6 +1,6 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Button } from './index'
+import Button from './index'
 import { FlexContainer } from 'stories/storyStyles'
 import { CommonColors, CommonSizes, CommonVariants } from 'themes/themTypes'
 

@@ -1,26 +1,26 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import SwitchBox from './index'
+import CheckBox from './index'
 import { FlexContainer } from 'stories/storyStyles'
 import { CommonColors, CommonSizes } from 'themes/themTypes'
 
 export default {
-  title: 'Components/SwitchBox',
-  component: SwitchBox,
-} as ComponentMeta<typeof SwitchBox>
+  title: 'Components/CheckBox',
+  component: CheckBox,
+} as ComponentMeta<typeof CheckBox>
 
-const Template: ComponentStory<typeof SwitchBox> = (args) => {
+const Template: ComponentStory<typeof CheckBox> = (args) => {
   return (
     <>
-      <FlexContainer label="OFF">
-        <SwitchBox {...args} size={CommonSizes.small} />
-        <SwitchBox {...args} size={CommonSizes.medium} />
-        <SwitchBox {...args} size={CommonSizes.large} />
+      <FlexContainer label="Checked">
+        <CheckBox {...args} size={CommonSizes.small} />
+        <CheckBox {...args} size={CommonSizes.medium} />
+        <CheckBox {...args} size={CommonSizes.large} />
       </FlexContainer>
-      <FlexContainer label="ON">
-        <SwitchBox {...args} size={CommonSizes.small} defaultValue />
-        <SwitchBox {...args} size={CommonSizes.medium} defaultValue />
-        <SwitchBox {...args} size={CommonSizes.large} defaultValue />
+      <FlexContainer label="Not Checked">
+        <CheckBox {...args} size={CommonSizes.small} defaultValue />
+        <CheckBox {...args} size={CommonSizes.medium} defaultValue />
+        <CheckBox {...args} size={CommonSizes.large} defaultValue />
       </FlexContainer>
     </>
   )

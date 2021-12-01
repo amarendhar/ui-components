@@ -14,7 +14,7 @@ type ButtonProps = {
   children: React.ReactNode
 }
 
-export const Button = ({
+const Button = ({
   color = CommonColors.primary,
   variant = CommonVariants.contained,
   size = CommonSizes.medium,
