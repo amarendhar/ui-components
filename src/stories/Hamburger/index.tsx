@@ -53,27 +53,26 @@ const Hamburger = ({
       variant={variant}
       size={size}
     >
-      <Bar
-        color={color}
-        variant={variant}
-        isOpen={isOpen}
-        size={size}
-        disabled={disabled}
-      />
-      <Bar
-        color={color}
-        variant={variant}
-        size={size}
-        isOpen={isOpen}
-        disabled={disabled}
-      />
-      <Bar
-        color={color}
-        variant={variant}
-        size={size}
-        isOpen={isOpen}
-        disabled={disabled}
-      />
+      <Track size={size}>
+        <Bar
+          color={color}
+          variant={variant}
+          disabled={disabled}
+          isOpen={isOpen}
+        />
+        <Bar
+          color={color}
+          variant={variant}
+          disabled={disabled}
+          isOpen={isOpen}
+        />
+        <Bar
+          color={color}
+          variant={variant}
+          disabled={disabled}
+          isOpen={isOpen}
+        />
+      </Track>
     </ButtonContainer>
   )
 }
@@ -95,23 +94,6 @@ const buttonContainerVariants = getStyles<ButtonContainerProps>((props) => {
   const { main, dark, light, contrastText } = palette[variant][color]
 
   return {
-    size: {
-      [CommonSizes.sm]: {
-        width: 40,
-        gridGap: 5,
-        padding: 8,
-      },
-      [CommonSizes.md]: {
-        width: 50,
-        gridGap: 5,
-        padding: 10,
-      },
-      [CommonSizes.lg]: {
-        width: 60,
-        gridGap: 8,
-        padding: 10,
-      },
-    },
     variant: {
       [CommonVariants.contained]: {
         backgroundColor: main,
@@ -170,13 +152,11 @@ const buttonContainerVariants = getStyles<ButtonContainerProps>((props) => {
 })
 
 const ButtonContainer = styled.button<ButtonContainerProps>`
+  position: relative;
   border: 0;
   border-radius: ${({ theme }) => theme.space.sm}px;
   background-color: transparent;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 0;
 
   z-index: 999;
   cursor: pointer;
@@ -190,12 +170,47 @@ const ButtonContainer = styled.button<ButtonContainerProps>`
   ${buttonContainerVariants};
 `
 
+type TrackProps = {
+  size: CommonSizes
+}
+
+const TrackVariants = getStyles<TrackProps>((props) => {
+  return {
+    size: {
+      [CommonSizes.sm]: {
+        margin: '2px 8px',
+        width: 35,
+        height: 35,
+      },
+      [CommonSizes.md]: {
+        margin: '3px 10px',
+        width: 40,
+        height: 40,
+      },
+      [CommonSizes.lg]: {
+        margin: '4px 12px',
+        width: 50,
+        height: 50,
+      },
+    },
+  }
+})
+
+const Track = styled.span<TrackProps>`
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  ${TrackVariants};
+`
+
 type BarProps = {
   color: CommonColors
   variant: CommonVariants
-  isOpen: boolean
-  size: CommonSizes
   disabled: boolean
+  isOpen: boolean
 }
 
 const barVariants = getStyles<BarProps>((props) => {
@@ -203,50 +218,11 @@ const barVariants = getStyles<BarProps>((props) => {
     theme: { palette },
     color,
     variant,
-    isOpen,
     disabled,
   } = props
   const { main, contrastText } = palette[variant][color]
 
   return {
-    size: {
-      [CommonSizes.sm]: {
-        '&:nth-child(1)': {
-          transform: isOpen ? 'rotate(-36deg) translate(-4px, 6px)' : 'none',
-        },
-        '&:nth-child(2)': {
-          width: '75%',
-          opacity: isOpen ? 0 : 1,
-        },
-        '&:nth-child(3)': {
-          transform: isOpen ? 'rotate(36deg) translate(-4px, -6px)' : 'none',
-        },
-      },
-      [CommonSizes.md]: {
-        '&:nth-child(1)': {
-          transform: isOpen ? 'rotate(-36deg) translate(-4px, 6px)' : 'none',
-        },
-        '&:nth-child(2)': {
-          width: '75%',
-          opacity: isOpen ? 0 : 1,
-        },
-        '&:nth-child(3)': {
-          transform: isOpen ? 'rotate(36deg) translate(-4px, -6px)' : 'none',
-        },
-      },
-      [CommonSizes.lg]: {
-        '&:nth-child(1)': {
-          transform: isOpen ? 'rotate(-36deg) translate(-6px, 8px)' : 'none',
-        },
-        '&:nth-child(2)': {
-          width: '75%',
-          opacity: isOpen ? 0 : 1,
-        },
-        '&:nth-child(3)': {
-          transform: isOpen ? 'rotate(36deg) translate(-6px, -8px)' : 'none',
-        },
-      },
-    },
     variant: {
       [CommonVariants.contained]: {
         backgroundColor: disabled
@@ -264,11 +240,29 @@ const barVariants = getStyles<BarProps>((props) => {
 })
 
 const Bar = styled.span<BarProps>`
+  position: absolute;
+  display: inline-block;
   width: 100%;
   height: 2px;
   border-radius: ${({ theme }) => theme.radii.md}px;
 
   transition: all 300ms;
+
+  &:nth-child(1) {
+    top: ${({ isOpen }) => (isOpen ? 'calc(50% - 1px)' : 'calc(20% - 1px)')};
+    transform: ${({ isOpen }) => (isOpen ? 'rotate(-36deg)' : 'none')};
+  }
+
+  &:nth-child(2) {
+    top: calc(50% - 1px);
+    width: 75%;
+    opacity: ${({ isOpen }) => (isOpen ? 0 : 1)};
+  }
+
+  &:nth-child(3) {
+    top: ${({ isOpen }) => (isOpen ? 'calc(50% - 1px)' : 'calc(80% - 1px)')};
+    transform: ${({ isOpen }) => (isOpen ? 'rotate(36deg)' : 'none')};
+  }
 
   ${barVariants};
 `
