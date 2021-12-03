@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Focus } from 'styles'
 import { getStyles } from 'themes/themeUtils'
 import { CommonColors, CommonSizes, CommonVariants } from 'themes/themTypes'
 
@@ -9,18 +10,18 @@ type ButtonProps = {
   size?: CommonSizes
   'data-testid'?: string
   className?: string
-  onClick?: () => void
   disabled?: boolean
+  onClick?: () => void
   children: React.ReactNode
 }
 
 const Button = ({
   color = CommonColors.primary,
   variant = CommonVariants.contained,
-  size = CommonSizes.medium,
+  size = CommonSizes.md,
   className = '',
-  onClick = () => {},
   disabled = false,
+  onClick = () => {},
   children,
   ...restProps
 }: ButtonProps) => {
@@ -74,15 +75,15 @@ const buttonContainerVariants = getStyles<ButtonContainerProps>((props) => {
 
   return {
     size: {
-      [CommonSizes.small]: {
+      [CommonSizes.sm]: {
         padding: '4px 10px',
         fontSize: fontSize[size],
       },
-      [CommonSizes.medium]: {
+      [CommonSizes.md]: {
         padding: '6px 16px',
         fontSize: fontSize[size],
       },
-      [CommonSizes.large]: {
+      [CommonSizes.lg]: {
         padding: '8px 22px',
         fontSize: fontSize[size],
       },
@@ -151,13 +152,19 @@ const buttonContainerVariants = getStyles<ButtonContainerProps>((props) => {
 const ButtonContainer = styled.button<ButtonContainerProps>`
   position: relative;
   box-sizing: border-box;
-  cursor: pointer;
+
   border: 0;
-  outline: none;
-  user-select: none;
+  border-radius: ${({ theme }) => theme.space.sm}px;
+
   line-height: 1.7;
-  border-radius: ${({ theme }) => theme.space.small}px;
-  transition: all 300ms ease 0s;
+  user-select: none;
+  cursor: pointer;
+
+  transition: background-color 0.3s ease, border 0.3s ease;
+
+  &:focus-visible {
+    ${Focus}
+  }
 
   ${buttonContainerVariants}
 `

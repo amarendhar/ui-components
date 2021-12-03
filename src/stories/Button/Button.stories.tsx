@@ -20,45 +20,33 @@ const Template: ComponentStory<typeof Button> = (args) => {
   return (
     <>
       <FlexContainer label="Contained">
-        <Button {...args} size={CommonSizes.small} />
-        <Button {...args} size={CommonSizes.medium} />
-        <Button {...args} size={CommonSizes.large} />
+        <Button {...args} size={CommonSizes.sm} />
+        <Button {...args} size={CommonSizes.md} />
+        <Button {...args} size={CommonSizes.lg} />
       </FlexContainer>
 
       <FlexContainer label="Outlined">
         <Button
           {...args}
-          size={CommonSizes.small}
+          size={CommonSizes.sm}
           variant={CommonVariants.outlined}
         />
         <Button
           {...args}
-          size={CommonSizes.medium}
+          size={CommonSizes.md}
           variant={CommonVariants.outlined}
         />
         <Button
           {...args}
-          size={CommonSizes.large}
+          size={CommonSizes.lg}
           variant={CommonVariants.outlined}
         />
       </FlexContainer>
 
       <FlexContainer label="Text">
-        <Button
-          {...args}
-          size={CommonSizes.small}
-          variant={CommonVariants.text}
-        />
-        <Button
-          {...args}
-          size={CommonSizes.medium}
-          variant={CommonVariants.text}
-        />
-        <Button
-          {...args}
-          size={CommonSizes.large}
-          variant={CommonVariants.text}
-        />
+        <Button {...args} size={CommonSizes.sm} variant={CommonVariants.text} />
+        <Button {...args} size={CommonSizes.md} variant={CommonVariants.text} />
+        <Button {...args} size={CommonSizes.lg} variant={CommonVariants.text} />
       </FlexContainer>
     </>
   )

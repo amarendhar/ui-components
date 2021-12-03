@@ -1,60 +1,22 @@
-import { oldColors, Palette, Theme } from './themTypes'
+import { Palette, Theme } from './themTypes'
 import { createPalette } from './themeUtils'
 
-// ToDo: Remove this, this is old code
-export const colors: oldColors = {
-  white: {
-    100: '#ffffff',
-    80: '#ecedef',
-  },
-  blue: {
-    100: '#115293',
-    80: '#1976d2',
-  },
-  green: {
-    100: '#367f39',
-    80: '#4caf50',
-  },
-  orange: {
-    100: '#cb7d09',
-    80: '#ff9800',
-  },
-  red: {
-    100: '#9a0036',
-    80: '#dc004e',
-  },
-  grey: {
-    100: '#808080',
-    80: '#969494',
-  },
-  silver: {
-    100: '#c5c2c2',
-    80: '#e0e0e0',
-    60: '#efefef',
-  },
-  black: {
-    100: '#000000',
-    80: '#484848',
-  },
-  yellow: {
-    100: '#F8E831',
-  },
-  outline: {
-    100: '#e0e0e0',
-    80: 'transparent',
-  },
-}
-
 export const space: Theme['space'] = {
-  small: 5,
-  medium: 10,
-  large: 15,
+  sm: 5,
+  md: 10,
+  lg: 15,
 }
 
 export const fontSize: Theme['fontSize'] = {
-  small: 13,
-  medium: 14,
-  large: 15,
+  sm: 13,
+  md: 14,
+  lg: 15,
+}
+
+const radii: Theme['radii'] = {
+  sm: 3,
+  md: 6,
+  lg: 10,
 }
 
 // ToDo: Remove this, this is old code
@@ -81,6 +43,10 @@ export const mediaQuery: Theme['mediaQuery'] = {
 const palette: Palette = createPalette()
 
 export const defaultTheme: Theme = {
+  space,
+  fontSize,
+  radii,
+  palette,
   /**
    * Do not include custom-breakpoints like below, when using styled-system library
    *  to avoid conflicts against breakpoints from styled-system npm,
@@ -89,69 +55,4 @@ export const defaultTheme: Theme = {
   // breakpoints,
   breakpoints,
   mediaQuery,
-  space,
-  fontSize,
-  palette,
-  // ToDo: Remove all below props, this is old code
-  colors,
-  default: {
-    bg: colors.silver,
-    border: colors.silver,
-    text: colors.black,
-    outline: {
-      bg: colors.outline,
-      border: colors.black,
-      text: colors.black,
-    },
-  },
-  primary: {
-    bg: colors.blue,
-    border: colors.blue,
-    text: colors.white,
-    outline: {
-      bg: colors.outline,
-      border: colors.blue,
-      text: colors.blue,
-    },
-  },
-  success: {
-    bg: colors.green,
-    border: colors.green,
-    text: colors.white,
-    outline: {
-      bg: colors.outline,
-      border: colors.green,
-      text: colors.green,
-    },
-  },
-  warning: {
-    bg: colors.orange,
-    border: colors.orange,
-    text: colors.white,
-    outline: {
-      bg: colors.outline,
-      border: colors.orange,
-      text: colors.orange,
-    },
-  },
-  danger: {
-    bg: colors.red,
-    border: colors.red,
-    text: colors.white,
-    outline: {
-      bg: colors.outline,
-      border: colors.red,
-      text: colors.red,
-    },
-  },
-  disabled: {
-    bg: colors.silver,
-    border: colors.silver,
-    text: colors.black,
-    outline: {
-      bg: colors.outline,
-      border: colors.silver,
-      text: colors.black,
-    },
-  },
 }

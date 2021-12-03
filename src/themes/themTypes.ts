@@ -1,52 +1,13 @@
-import { CustomObjType, ObjType } from 'types'
-
-// ToDo: Remove it, this is old type
-export type oldColorPalette = {
-  bg: ObjType
-  border: ObjType
-  text: ObjType
-}
-
-// ToDo: Remove it, this is old type
-export type oldColors = {
-  white: ObjType
-  blue: ObjType
-  green: ObjType
-  orange: ObjType
-  red: ObjType
-  grey: ObjType
-  silver: ObjType
-  black: ObjType
-  yellow: ObjType
-  outline: ObjType
-}
-
 export type Theme = {
-  breakpoints: CustomObjType<number>
-  mediaQuery: CustomObjType<string>
-  space: CustomObjType<number>
-  fontSize: CustomObjType<number>
+  space: Record<'sm' | 'md' | 'lg', number>
+  fontSize: Record<'sm' | 'md' | 'lg', number>
+  radii: Record<'sm' | 'md' | 'lg', number>
   palette: Palette
-  // ToDo: Remove all below types, these are old types
-  colors?: oldColors
-  default?: oldColorPalette & {
-    outline: oldColorPalette
-  }
-  primary?: oldColorPalette & {
-    outline: oldColorPalette
-  }
-  success?: oldColorPalette & {
-    outline: oldColorPalette
-  }
-  warning?: oldColorPalette & {
-    outline: oldColorPalette
-  }
-  danger?: oldColorPalette & {
-    outline: oldColorPalette
-  }
-  disabled?: oldColorPalette & {
-    outline: oldColorPalette
-  }
+  breakpoints: Record<'sm' | 'md' | 'lg', number>
+  mediaQuery: Record<
+    'sm' | 'md' | 'lg' | '<sm' | '<md' | '<lg' | '>sm' | '>md' | '>lg',
+    string
+  >
 }
 
 export type DisabledPaletteColor = {
@@ -59,7 +20,7 @@ export type DisabledPaletteColor = {
  *  https://react-bootstrap.github.io/components/buttons/
  */
 
- export enum CommonColors {
+export enum CommonColors {
   // ToDo: is default-type required ?
   default = 'default',
   primary = 'primary',
@@ -73,9 +34,9 @@ export type DisabledPaletteColor = {
 }
 
 export enum CommonSizes {
-  small = 'small',
-  medium = 'medium',
-  large = 'large',
+  sm = 'sm',
+  md = 'md',
+  lg = 'lg',
 }
 
 export enum CommonVariants {

@@ -13,14 +13,14 @@ const Template: ComponentStory<typeof SwitchBox> = (args) => {
   return (
     <>
       <FlexContainer label="OFF">
-        <SwitchBox {...args} size={CommonSizes.small} />
-        <SwitchBox {...args} size={CommonSizes.medium} />
-        <SwitchBox {...args} size={CommonSizes.large} />
+        <SwitchBox {...args} size={CommonSizes.sm} />
+        <SwitchBox {...args} size={CommonSizes.md} />
+        <SwitchBox {...args} size={CommonSizes.lg} />
       </FlexContainer>
       <FlexContainer label="ON">
-        <SwitchBox {...args} size={CommonSizes.small} defaultValue />
-        <SwitchBox {...args} size={CommonSizes.medium} defaultValue />
-        <SwitchBox {...args} size={CommonSizes.large} defaultValue />
+        <SwitchBox {...args} size={CommonSizes.sm} defaultValue />
+        <SwitchBox {...args} size={CommonSizes.md} defaultValue />
+        <SwitchBox {...args} size={CommonSizes.lg} defaultValue />
       </FlexContainer>
     </>
   )

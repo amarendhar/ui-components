@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
+import { Focus } from 'styles'
 import { createClassName } from 'utils/helpers'
 import { getStyles } from 'themes/themeUtils'
 import { CommonColors, CommonSizes, CommonVariants } from 'themes/themTypes'
@@ -19,14 +20,16 @@ type CheckBoxProps = {
 
 /**
  * ToDo: Add test-cases.
+ * ToDo: focus is not working, as input-field has opacity:0 suggested by mui-documentation,
+ *  need show focus on container manually by javascript when focused on input-field.
  * ToDo: Add `indeterminate` type, refer `https://v4.mui.com/components/checkboxes/`.
  */
 const CheckBox = ({
   color = CommonColors.primary,
   variant = CommonVariants.contained,
-  size = CommonSizes.medium,
+  size = CommonSizes.md,
   className = '',
-  onChange = () => {},
+  onChange,
   defaultValue = false,
   value = false,
   disabled = false,
@@ -77,6 +80,18 @@ const CheckBox = ({
       className={`container ${className}`}
       disabled={disabled}
     >
+      <Input
+        type="checkbox"
+        checked={checked}
+        onChange={() => {
+          if (disabled) {
+            return
+          }
+
+          toggleChecked(!checked)
+          onChange?.(!checked)
+        }}
+      />
       <CheckTrack
         color={color}
         variant={variant}
@@ -87,18 +102,6 @@ const CheckBox = ({
         })}
       >
         <CheckThumb size={size} checked={checked} />
-        <Input
-          type="checkbox"
-          checked={checked}
-          onChange={() => {
-            if (disabled) {
-              return
-            }
-
-            toggleChecked(!checked)
-            onChange(!checked)
-          }}
-        />
       </CheckTrack>
       {children && <Label disabled={disabled}>{children}</Label>}
     </Container>
@@ -108,6 +111,8 @@ const CheckBox = ({
 export default CheckBox
 
 const Container = styled.label<{ disabled: boolean }>`
+  position: relative;
+
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -136,15 +141,15 @@ const checkTrackVariants = getStyles<CheckTrackProps>((props) => {
 
   return {
     size: {
-      [CommonSizes.small]: {
+      [CommonSizes.sm]: {
         width: 12,
         height: 12,
       },
-      [CommonSizes.medium]: {
+      [CommonSizes.md]: {
         width: 16,
         height: 16,
       },
-      [CommonSizes.large]: {
+      [CommonSizes.lg]: {
         width: 20,
         height: 20,
       },
@@ -171,12 +176,11 @@ const checkTrackVariants = getStyles<CheckTrackProps>((props) => {
 })
 
 const CheckTrack = styled.span<CheckTrackProps>`
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 3px;
-  transition: 0.2s;
+  transition: background-color 0.4s, border 0.4s;
 
   ${checkTrackVariants}
 `
@@ -190,6 +194,10 @@ const Input = styled.input`
   margin: 0;
   padding: 0;
   opacity: 0;
+
+  &:focus-visible + span {
+    ${Focus}
+  }
 `
 
 type CheckThumbProps = {
@@ -200,17 +208,17 @@ type CheckThumbProps = {
 const checkThumbVariants = getStyles<CheckThumbProps>(({ checked }) => {
   return {
     size: {
-      small: {
+      sm: {
         width: 4,
         height: 8,
         marginTop: -2,
       },
-      medium: {
+      md: {
         width: 5,
         height: 11,
         marginTop: -3,
       },
-      large: {
+      lg: {
         width: 6,
         height: 12,
         marginTop: -4,
@@ -231,7 +239,7 @@ const CheckThumb = styled.span<CheckThumbProps>`
 
 const Label = styled.span<{ disabled: boolean }>`
   margin-left: 8px;
-  user-select: none;
+  user-srefelect: none;
 
   color: ${(props) =>
     props.disabled ? props.theme.palette.disabled.contrastText : ''};

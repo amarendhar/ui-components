@@ -65,15 +65,15 @@ type getStyleProps = Record<getStyleTypes, VariantStyle>
  * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  * props ->
  *  {
- *    size: { small: {...}, medium: {...}, large: {...} },
+ *    size: { sm: {...}, md: {...}, lg: {...} },
  *    variant: { contained: {...}, outlined: {...}, text: {...} },
  *  }
  *
  *  Notes ->
  *    type -> `size | variant` (key-names)
  *      variants -> `props.size & props.variant` (object-values)
- *        variantName -> `small | medium | large | contained | outlined | text` (key-names)
- *          variantStyle -> `props.size.small | props.size.medium | props.size.large | props.variant.contained | props.variant.outlined | props.variant.text` (object-values)
+ *        variantName -> `sm | md | lg | contained | outlined | text` (key-names)
+ *          variantStyle -> `props.size.sm | props.size.md | props.size.lg | props.variant.contained | props.variant.outlined | props.variant.text` (object-values)
  */
 // ToDo: replace 'any' with styledObjectProps/reactProps
 // Note: Here `cbProps` is nothing but `reactComponentProps`
@@ -128,19 +128,19 @@ Example-1:  Usage example
       // props
       size: { // type -> size
         // variants
-        small: { // variantName -> 'small'
+        sm: { // variantName -> 'sm'
           // variantStyle
           width: 28,
           height: 14,
           border: `1px solid ${color}`,
         },
-        medium: { // variantName -> 'medium'
+        md: { // variantName -> 'md'
           // variantStyle
           width: 33,
           height: 18,
           border: `1px solid ${color}`,
         },
-        large: { // variantName -> 'large'
+        lg: { // variantName -> 'lg'
           // variantStyle
           width: 45,
           height: 21,
@@ -196,17 +196,17 @@ Example-2:  Usage example
   const switchVariants = getStyles<SwitchProps>((props) => {
     return {
       size: {
-        small: {
+        sm: {
           width: 10,
           height: 10,
           transform: checked ? 'translateX(15px)' : 'translateX(3px)',
         },
-        medium: {
+        md: {
           width: 12,
           height: 12,
           transform: checked ? 'translateX(18px)' : 'translateX(3px)',
         },
-        large: {
+        lg: {
           width: 15,
           height: 15,
           transform: checked ? 'translateX(27px)' : 'translateX(3px)',

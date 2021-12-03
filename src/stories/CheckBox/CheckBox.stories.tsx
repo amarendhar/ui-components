@@ -13,14 +13,14 @@ const Template: ComponentStory<typeof CheckBox> = (args) => {
   return (
     <>
       <FlexContainer label="Checked">
-        <CheckBox {...args} size={CommonSizes.small} />
-        <CheckBox {...args} size={CommonSizes.medium} />
-        <CheckBox {...args} size={CommonSizes.large} />
+        <CheckBox {...args} size={CommonSizes.sm} />
+        <CheckBox {...args} size={CommonSizes.md} />
+        <CheckBox {...args} size={CommonSizes.lg} />
       </FlexContainer>
       <FlexContainer label="Not Checked">
-        <CheckBox {...args} size={CommonSizes.small} defaultValue />
-        <CheckBox {...args} size={CommonSizes.medium} defaultValue />
-        <CheckBox {...args} size={CommonSizes.large} defaultValue />
+        <CheckBox {...args} size={CommonSizes.sm} defaultValue />
+        <CheckBox {...args} size={CommonSizes.md} defaultValue />
+        <CheckBox {...args} size={CommonSizes.lg} defaultValue />
       </FlexContainer>
     </>
   )

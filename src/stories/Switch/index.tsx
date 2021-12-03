@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
+import { Focus } from 'styles'
 import { createClassName } from 'utils/helpers'
 import { getStyles } from 'themes/themeUtils'
 import { CommonColors, CommonSizes, CommonVariants } from 'themes/themTypes'
@@ -10,9 +11,9 @@ type SwitchBoxProps = {
   size?: CommonSizes
   'data-testid'?: string
   className?: string
-  onChange?: (checked: boolean) => void
   defaultValue?: boolean
   value?: boolean
+  onChange?: (checked: boolean) => void
   disabled?: boolean
   children: React.ReactNode
 }
@@ -20,11 +21,11 @@ type SwitchBoxProps = {
 const SwitchBox = ({
   color = CommonColors.primary,
   variant = CommonVariants.contained,
-  size = CommonSizes.medium,
+  size = CommonSizes.md,
   className = '',
-  onChange = () => {},
   defaultValue = false,
   value = false,
+  onChange = () => {},
   disabled = false,
   children,
   ...restProps
@@ -46,6 +47,18 @@ const SwitchBox = ({
       className={`container ${className}`}
       disabled={disabled}
     >
+      <Input
+        type="checkbox"
+        checked={checked}
+        onChange={() => {
+          if (disabled) {
+            return
+          }
+
+          toggleChecked(!checked)
+          onChange(!checked)
+        }}
+      />
       <SwitchTrack
         color={color}
         variant={variant}
@@ -56,18 +69,6 @@ const SwitchBox = ({
         })}
       >
         <SwitchThumb size={size} checked={checked} />
-        <Input
-          type="checkbox"
-          checked={checked}
-          onChange={() => {
-            if (disabled) {
-              return
-            }
-
-            toggleChecked(!checked)
-            onChange(!checked)
-          }}
-        />
       </SwitchTrack>
       {children && <Label disabled={disabled}>{children}</Label>}
     </Container>
@@ -77,6 +78,8 @@ const SwitchBox = ({
 export default SwitchBox
 
 const Container = styled.label<{ disabled: boolean }>`
+  position: relative;
+
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -107,15 +110,15 @@ const switchTrackVariants = getStyles<SwitchTrackProps>((props) => {
 
   return {
     size: {
-      [CommonSizes.small]: {
+      [CommonSizes.sm]: {
         width: 28,
         height: 14,
       },
-      [CommonSizes.medium]: {
+      [CommonSizes.md]: {
         width: 33,
         height: 18,
       },
-      [CommonSizes.large]: {
+      [CommonSizes.lg]: {
         width: 45,
         height: 21,
       },
@@ -142,24 +145,27 @@ const switchTrackVariants = getStyles<SwitchTrackProps>((props) => {
 })
 
 const SwitchTrack = styled.span<SwitchTrackProps>`
-  position: relative;
   display: flex;
   align-items: center;
   border-radius: 34px;
-  transition: 0.4s;
+  transition: background-color 0.4s, border 0.4s;
 
   ${switchTrackVariants}
 `
 
 const Input = styled.input<{ checked: boolean }>`
   position: absolute;
+  top: 0;
   left: 0;
-  right: 0;
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
   opacity: 0;
+
+  &:focus-visible + span {
+    ${Focus}
+  }
 `
 
 type SwitchThumbProps = {
@@ -170,17 +176,17 @@ type SwitchThumbProps = {
 const switchThumbVariants = getStyles<SwitchThumbProps>(({ checked }) => {
   return {
     size: {
-      small: {
+      sm: {
         width: 10,
         height: 10,
         transform: checked ? 'translateX(15px)' : 'translateX(3px)',
       },
-      medium: {
+      md: {
         width: 12,
         height: 12,
         transform: checked ? 'translateX(18px)' : 'translateX(3px)',
       },
-      large: {
+      lg: {
         width: 15,
         height: 15,
         transform: checked ? 'translateX(27px)' : 'translateX(3px)',
