@@ -180,19 +180,19 @@ const TrackVariants = getStyles<TrackProps>((props) => {
   return {
     size: {
       [CommonSizes.sm]: {
-        margin: '2px 8px',
-        width: 35,
-        height: 35,
+        margin: '4px 8px',
+        width: 25,
+        height: 25,
       },
       [CommonSizes.md]: {
-        margin: '3px 10px',
-        width: 40,
-        height: 40,
+        margin: '4px 8px',
+        width: 30,
+        height: 30,
       },
       [CommonSizes.lg]: {
-        margin: '4px 12px',
-        width: 50,
-        height: 50,
+        margin: '4px 8px',
+        width: 35,
+        height: 35,
       },
     },
   }
