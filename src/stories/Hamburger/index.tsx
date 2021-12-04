@@ -12,8 +12,8 @@ type HamburgerProps = {
   className?: string
   defaultValue?: boolean
   value?: boolean
-  onChange?: (isOpen: boolean) => void
   disabled?: boolean
+  onChange?: (isOpen: boolean) => void
 }
 
 const Hamburger = ({
@@ -23,8 +23,8 @@ const Hamburger = ({
   className = '',
   defaultValue = false,
   value = false,
-  onChange = () => {},
   disabled = false,
+  onChange = () => {},
   ...restProps
 }: HamburgerProps) => {
   const [isOpen, setOpen] = useState(defaultValue)
@@ -153,10 +153,12 @@ const buttonContainerVariants = getStyles<ButtonContainerProps>((props) => {
 
 const ButtonContainer = styled.button<ButtonContainerProps>`
   position: relative;
+
   border: 0;
-  border-radius: ${({ theme }) => theme.space.sm}px;
-  background-color: transparent;
   padding: 0;
+  border-radius: ${({ theme }) => theme.space.sm}px;
+
+  background-color: transparent;
 
   z-index: 999;
   cursor: pointer;
@@ -242,8 +244,10 @@ const barVariants = getStyles<BarProps>((props) => {
 const Bar = styled.span<BarProps>`
   position: absolute;
   display: inline-block;
+
   width: 100%;
   height: 2px;
+  
   border-radius: ${({ theme }) => theme.radii.md}px;
 
   transition: all 300ms;

@@ -11,8 +11,8 @@ type ButtonProps = {
   'data-testid'?: string
   className?: string
   disabled?: boolean
-  onClick?: () => void
   children: React.ReactNode
+  onClick?: () => void
 }
 
 const Button = ({
@@ -21,8 +21,8 @@ const Button = ({
   size = CommonSizes.md,
   className = '',
   disabled = false,
-  onClick = () => {},
   children,
+  onClick = () => {},
   ...restProps
 }: ButtonProps) => {
   return (
@@ -66,7 +66,7 @@ type ButtonContainerProps = {
  */
 const buttonContainerVariants = getStyles<ButtonContainerProps>((props) => {
   const {
-    theme: { palette, fontSize },
+    theme: { palette, fontSizes },
     color,
     variant,
     size,
@@ -77,15 +77,15 @@ const buttonContainerVariants = getStyles<ButtonContainerProps>((props) => {
     size: {
       [CommonSizes.sm]: {
         padding: '4px 10px',
-        fontSize: fontSize[size],
+        fontSize: fontSizes[size],
       },
       [CommonSizes.md]: {
         padding: '6px 16px',
-        fontSize: fontSize[size],
+        fontSize: fontSizes[size],
       },
       [CommonSizes.lg]: {
         padding: '8px 22px',
-        fontSize: fontSize[size],
+        fontSize: fontSizes[size],
       },
     },
     variant: {
@@ -157,6 +157,7 @@ const ButtonContainer = styled.button<ButtonContainerProps>`
   border-radius: ${({ theme }) => theme.space.sm}px;
 
   line-height: 1.7;
+
   user-select: none;
   cursor: pointer;
 

@@ -14,6 +14,7 @@ export const isArray = (value: any): boolean => typeOf(value, 'array')
 export const isObject = (value: any): boolean => typeOf(value, 'object object')
 
 export const getMediaQuery = (query: string) =>
+  // @ts-ignore
   mediaQuery[query].replace('@media', '')
 
 export const createClassName = (

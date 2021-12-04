@@ -13,9 +13,9 @@ type SwitchBoxProps = {
   className?: string
   defaultValue?: boolean
   value?: boolean
-  onChange?: (checked: boolean) => void
   disabled?: boolean
   children: React.ReactNode
+  onChange?: (checked: boolean) => void
 }
 
 const SwitchBox = ({
@@ -25,9 +25,9 @@ const SwitchBox = ({
   className = '',
   defaultValue = false,
   value = false,
-  onChange = () => {},
   disabled = false,
   children,
+  onChange = () => {},
   ...restProps
 }: SwitchBoxProps) => {
   const [checked, toggleChecked] = useState(defaultValue)
@@ -82,6 +82,7 @@ const Container = styled.label<{ disabled: boolean }>`
 
   display: flex;
   align-items: center;
+
   cursor: pointer;
   ${(props) => (props.disabled ? 'pointer-events: none' : '')};
 
@@ -148,6 +149,7 @@ const SwitchTrack = styled.span<SwitchTrackProps>`
   display: flex;
   align-items: center;
   border-radius: 34px;
+
   transition: background-color 0.4s, border 0.4s;
 
   ${switchTrackVariants}
@@ -155,6 +157,7 @@ const SwitchTrack = styled.span<SwitchTrackProps>`
 
 const Input = styled.input<{ checked: boolean }>`
   position: absolute;
+
   top: 0;
   left: 0;
   width: 100%;
@@ -196,8 +199,10 @@ const switchThumbVariants = getStyles<SwitchThumbProps>(({ checked }) => {
 })
 
 const SwitchThumb = styled.span<SwitchThumbProps>`
-  background-color: white;
   border-radius: 50%;
+
+  background-color: white;
+
   transition: 0.4s;
 
   ${switchThumbVariants}
@@ -205,7 +210,9 @@ const SwitchThumb = styled.span<SwitchThumbProps>`
 
 const Label = styled.span<{ disabled: boolean }>`
   margin-left: 8px;
-  user-select: none;
+
   color: ${(props) =>
     props.disabled ? props.theme.palette.disabled.contrastText : ''};
+
+  user-select: none;
 `

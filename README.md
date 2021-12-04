@@ -46,11 +46,11 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## UX/UI reference links
-* https://bareynol.github.io/mui-theme-creator
-* https://next.material-ui.com/customization/color/
-* https://material.io/resources/color (check both tabs 'USER INTERFACES & ACCESSIBILITY')
-* https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast
-* https://next.material-ui.com/system/palette/
+  - https://bareynol.github.io/mui-theme-creator
+  - https://next.material-ui.com/customization/color/
+  - https://material.io/resources/color (check both tabs 'USER INTERFACES & ACCESSIBILITY')
+  - https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast
+  - https://next.material-ui.com/system/palette/
 
 ## Large vs Normal Text
 * Large text is defined as 14 point (typically 18.66px) and bold or larger, or 18 point (typically 24px) or larger. Normal text is below 18 point or below 14 point and bold.
@@ -59,4 +59,3 @@ To learn React, check out the [React documentation](https://reactjs.org/).
   - https://bharathvaj.me/blog/focus-vs-within-vs-visible
   - https://matthiasott.com/notes/focus-visible-is-here
 
-  

@@ -38,7 +38,7 @@ export const Theme = ({ className = '', theme, ...restProps }: ThemeProps) => {
       )
     }
 
-    if (key?.includes && key?.includes('fontSize')) {
+    if (key?.includes && key?.includes('fontSizes')) {
       return (
         <FontSize
           fontSize={

@@ -7,7 +7,7 @@ export const space: Theme['space'] = {
   lg: 15,
 }
 
-export const fontSize: Theme['fontSize'] = {
+export const fontSizes: Theme['fontSizes'] = {
   sm: 13,
   md: 14,
   lg: 15,
@@ -44,7 +44,7 @@ const palette: Palette = createPalette()
 
 export const defaultTheme: Theme = {
   space,
-  fontSize,
+  fontSizes,
   radii,
   palette,
   /**

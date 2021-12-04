@@ -11,11 +11,11 @@ type CheckBoxProps = {
   size?: CommonSizes
   'data-testid'?: string
   className?: string
-  onChange?: (checked: boolean) => void
   defaultValue?: boolean
   value?: boolean
   disabled?: boolean
   children: React.ReactNode
+  onChange?: (checked: boolean) => void
 }
 
 /**
@@ -29,11 +29,11 @@ const CheckBox = ({
   variant = CommonVariants.contained,
   size = CommonSizes.md,
   className = '',
-  onChange,
   defaultValue = false,
   value = false,
   disabled = false,
   children,
+  onChange,
   ...restProps
 }: CheckBoxProps) => {
   const [checked, toggleChecked] = useState(defaultValue)
@@ -115,6 +115,7 @@ const Container = styled.label<{ disabled: boolean }>`
 
   display: flex;
   align-items: center;
+
   cursor: pointer;
   ${(props) => (props.disabled ? 'pointer-events: none' : '')};
 
@@ -179,7 +180,9 @@ const CheckTrack = styled.span<CheckTrackProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+
   border-radius: 3px;
+
   transition: background-color 0.4s, border 0.4s;
 
   ${checkTrackVariants}
@@ -187,6 +190,7 @@ const CheckTrack = styled.span<CheckTrackProps>`
 
 const Input = styled.input`
   position: absolute;
+
   top: 0;
   left: 0;
   width: 100%;
@@ -230,17 +234,20 @@ const checkThumbVariants = getStyles<CheckThumbProps>(({ checked }) => {
 const CheckThumb = styled.span<CheckThumbProps>`
   border-bottom: 2px solid ${({ theme }) => theme.palette.common.white};
   border-right: 2px solid ${({ theme }) => theme.palette.common.white};
+
+  opacity: ${({ checked }) => (checked ? 1 : 0)};
+
   transform: rotate(40deg);
   transition: 0.2s;
-  opacity: ${({ checked }) => (checked ? 1 : 0)};
 
   ${checkThumbVariants}
 `
 
 const Label = styled.span<{ disabled: boolean }>`
   margin-left: 8px;
-  user-srefelect: none;
 
   color: ${(props) =>
     props.disabled ? props.theme.palette.disabled.contrastText : ''};
+
+  user-select: none;
 `

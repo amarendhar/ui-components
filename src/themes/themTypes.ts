@@ -1,6 +1,6 @@
 export type Theme = {
   space: Record<'sm' | 'md' | 'lg', number>
-  fontSize: Record<'sm' | 'md' | 'lg', number>
+  fontSizes: Record<'sm' | 'md' | 'lg', number>
   radii: Record<'sm' | 'md' | 'lg', number>
   palette: Palette
   breakpoints: Record<'sm' | 'md' | 'lg', number>
