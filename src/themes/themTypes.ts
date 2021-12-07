@@ -3,9 +3,28 @@ export type Theme = {
   fontSizes: Record<'sm' | 'md' | 'lg', number>
   radii: Record<'sm' | 'md' | 'lg', number>
   palette: Palette
-  breakpoints: Record<'sm' | 'md' | 'lg', number>
+  breakpoints: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number>
   mediaQuery: Record<
-    'sm' | 'md' | 'lg' | '<sm' | '<md' | '<lg' | '>sm' | '>md' | '>lg',
+    | 'xs'
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'xl'
+    | '<xs'
+    | '<sm'
+    | '<md'
+    | '<lg'
+    | '<xl'
+    | 'xsQuery'
+    | 'smQuery'
+    | 'mdQuery'
+    | 'lgQuery'
+    | 'xlQuery'
+    | '<xsQuery'
+    | '<smQuery'
+    | '<mdQuery'
+    | '<lgQuery'
+    | '<xlQuery',
     string
   >
 }
@@ -110,6 +129,7 @@ export interface TypeText {
   primary: string
   secondary: string
   disabled: string
+  hint?: string
 }
 
 export interface TypeAction {
@@ -167,14 +187,13 @@ export type CommonPalette = {
 export interface Palette extends CommonPalette {
   common: CommonPaletteColors
   mode: PALETTE_MODE
-  // ToDo: `grey` is optional-type ?
-  grey?: Color
   disabled: DisabledPaletteColor
-  // text?: TypeText
   // ToDo: CommonVariants.contained is required ?
   [CommonVariants.contained]: CommonPalette
   [CommonVariants.outlined]: CommonPalette
   [CommonVariants.text]: CommonPalette
+  textt?: TypeText
+  grey: Color
   // contrastThreshold: number;
   // tonalOffset: PaletteTonalOffset;
   // divider: TypeDivider;

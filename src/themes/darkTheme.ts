@@ -1,7 +1,12 @@
 /**
+ * `darkTheme` props are from mui-v4, not from mui-v5.
+ *
  * Reference links
+ *  https://v4.mui.com/components
  *  https://next.material-ui.com/customization/default-theme/
  *  https://material.io/design/color/dark-theme.html#custom-application
+ *
+ * ToDo: Add `type` for `lightTheme`
  */
 const darkTheme = {
   breakpoints: {
@@ -9,53 +14,63 @@ const darkTheme = {
     values: {
       xs: 0,
       sm: 600,
-      md: 900,
-      lg: 1200,
-      xl: 1536,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
     },
-    unit: 'px',
   },
   direction: 'ltr',
-  components: {},
+  mixins: {
+    toolbar: {
+      minHeight: 56,
+      '@media (min-width:0px) and (orientation: landscape)': {
+        minHeight: 48,
+      },
+      '@media (min-width:600px)': {
+        minHeight: 64,
+      },
+    },
+  },
+  overrides: {},
   palette: {
-    mode: 'dark',
     common: {
       black: '#000',
       white: '#fff',
     },
+    type: 'dark',
     primary: {
       main: '#90caf9',
-      light: '#e3f2fd',
-      dark: '#42a5f5',
+      light: 'rgb(166, 212, 250)',
+      dark: 'rgb(100, 141, 174)',
       contrastText: 'rgba(0, 0, 0, 0.87)',
     },
     secondary: {
-      main: '#ce93d8',
-      light: '#f3e5f5',
-      dark: '#ab47bc',
+      main: '#f48fb1',
+      light: 'rgb(246, 165, 192)',
+      dark: 'rgb(170, 100, 123)',
       contrastText: 'rgba(0, 0, 0, 0.87)',
     },
     error: {
-      main: '#f44336',
       light: '#e57373',
+      main: '#f44336',
       dark: '#d32f2f',
       contrastText: '#fff',
     },
     warning: {
-      main: '#ffa726',
       light: '#ffb74d',
+      main: '#ff9800',
       dark: '#f57c00',
       contrastText: 'rgba(0, 0, 0, 0.87)',
     },
     info: {
-      main: '#29b6f6',
-      light: '#4fc3f7',
-      dark: '#0288d1',
-      contrastText: 'rgba(0, 0, 0, 0.87)',
+      light: '#64b5f6',
+      main: '#2196f3',
+      dark: '#1976d2',
+      contrastText: '#fff',
     },
     success: {
-      main: '#66bb6a',
       light: '#81c784',
+      main: '#4caf50',
       dark: '#388e3c',
       contrastText: 'rgba(0, 0, 0, 0.87)',
     },
@@ -70,9 +85,9 @@ const darkTheme = {
       '700': '#616161',
       '800': '#424242',
       '900': '#212121',
-      A100: '#f5f5f5',
-      A200: '#eeeeee',
-      A400: '#bdbdbd',
+      A100: '#d5d5d5',
+      A200: '#aaaaaa',
+      A400: '#303030',
       A700: '#616161',
     },
     contrastThreshold: 3,
@@ -81,12 +96,15 @@ const darkTheme = {
       primary: '#fff',
       secondary: 'rgba(255, 255, 255, 0.7)',
       disabled: 'rgba(255, 255, 255, 0.5)',
+      hint: 'rgba(255, 255, 255, 0.5)',
       icon: 'rgba(255, 255, 255, 0.5)',
     },
     divider: 'rgba(255, 255, 255, 0.12)',
     background: {
-      paper: '#121212',
+      paper: '#424242',
       default: '#121212',
+      level2: '#333',
+      level1: '#212121',
     },
     action: {
       active: '#fff',
@@ -102,18 +120,9 @@ const darkTheme = {
       activatedOpacity: 0.24,
     },
   },
-  shape: {
-    borderRadius: 4,
-  },
-  mixins: {
-    toolbar: {
-      minHeight: 56,
-      '@media (min-width:0px) and (orientation: landscape)': {
-        minHeight: 48,
-      },
-      '@media (min-width:600px)': {
-        minHeight: 64,
-      },
+  props: {
+    MuiBadge: {
+      overlap: 'rectangular',
     },
   },
   shadows: [
@@ -245,6 +254,9 @@ const darkTheme = {
       textTransform: 'uppercase',
     },
   },
+  shape: {
+    borderRadius: 4,
+  },
   transitions: {
     easing: {
       easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -270,6 +282,9 @@ const darkTheme = {
     modal: 1300,
     snackbar: 1400,
     tooltip: 1500,
+  },
+  nprogress: {
+    color: '#fff',
   },
 }
 

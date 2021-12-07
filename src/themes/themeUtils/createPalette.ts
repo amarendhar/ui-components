@@ -1,12 +1,6 @@
-import {
-  PaletteColor,
-  PaletteOptions,
-  PALETTE_MODE,
-  Palette,
-  Color,
-} from 'themes/themTypes'
-import { CommonVariants } from 'themes/themTypes'
 import colors from '../colors'
+import lightTheme from 'themes/lightTheme'
+import darkTheme from 'themes/darkTheme'
 import {
   decomposeColor,
   clamp,
@@ -15,98 +9,27 @@ import {
   darken,
   alpha,
 } from './colorManipulator'
+import {
+  PaletteColor,
+  PaletteOptions,
+  PALETTE_MODE,
+  Palette,
+  Color,
+  CommonVariants,
+} from 'themes/themTypes'
 
 const tonalOffset = 0.2
 const contrastThreshold = 3
-
-/**
- * ToDo: Do not use type 'any'
- */
-/**
- * Refer https://bareynol.github.io/mui-theme-creator
- */
-/**
- * Refer `light` method from @material-ui/core/styles/createPalette.js
- */
-export const light = {
-  // The colors used to style the text.
-  text: {
-    // The most important text.
-    primary: 'rgba(0, 0, 0, 0.87)',
-    // Secondary text.
-    secondary: 'rgba(0, 0, 0, 0.54)',
-    // Disabled text have even lower visual prominence.
-    disabled: 'rgba(0, 0, 0, 0.38)',
-    // Text hints.
-    hint: 'rgba(0, 0, 0, 0.38)',
-  },
-  // The color used to divide different elements.
-  divider: 'rgba(0, 0, 0, 0.12)',
-  // The background colors used to style the surfaces.
-  // Consistency between these values is important.
-  background: {
-    paper: colors.common.white,
-    default: colors.grey[50],
-  },
-  // The colors used to style the action elements.
-  action: {
-    // The color of an active action like an icon button.
-    active: 'rgba(0, 0, 0, 0.54)',
-    // The color of an hovered action.
-    hover: 'rgba(0, 0, 0, 0.04)',
-    hoverOpacity: 0.04,
-    // The color of a selected action.
-    selected: 'rgba(0, 0, 0, 0.08)',
-    selectedOpacity: 0.08,
-    // The color of a disabled action.
-    disabled: 'rgba(0, 0, 0, 0.26)',
-    // The background color of a disabled action.
-    disabledBackground: 'rgba(0, 0, 0, 0.12)',
-    disabledOpacity: 0.38,
-    focus: 'rgba(0, 0, 0, 0.12)',
-    focusOpacity: 0.12,
-    activatedOpacity: 0.12,
-  },
-}
-
-/**
- * Refer `dark` method from @material-ui/core/styles/createPalette.js
- */
-export const dark = {
-  text: {
-    primary: colors.common.white,
-    secondary: 'rgba(255, 255, 255, 0.7)',
-    disabled: 'rgba(255, 255, 255, 0.5)',
-    icon: 'rgba(255, 255, 255, 0.5)',
-  },
-  divider: 'rgba(255, 255, 255, 0.12)',
-  background: {
-    paper: colors.grey[800],
-    default: '#303030',
-  },
-  action: {
-    active: colors.common.white,
-    hover: 'rgba(255, 255, 255, 0.08)',
-    hoverOpacity: 0.08,
-    selected: 'rgba(255, 255, 255, 0.16)',
-    selectedOpacity: 0.16,
-    disabled: 'rgba(255, 255, 255, 0.3)',
-    disabledBackground: 'rgba(255, 255, 255, 0.12)',
-    disabledOpacity: 0.38,
-    focus: 'rgba(255, 255, 255, 0.12)',
-    focusOpacity: 0.12,
-    activatedOpacity: 0.24,
-  },
-}
 
 /**
  * Refer `getContrastText` method from @material-ui/core/styles/createPalette.js
  */
 const getContrastText = (background: string) => {
   const contrastText =
-    getContrastRatio(background, dark.text.primary) >= contrastThreshold
-      ? dark.text.primary
-      : light.text.primary
+    getContrastRatio(background, darkTheme.palette.text.primary) >=
+    contrastThreshold
+      ? darkTheme.palette.text.primary
+      : lightTheme.palette.text.primary
 
   if (process.env.NODE_ENV !== 'production') {
     const contrast = getContrastRatio(background, contrastText)
@@ -216,27 +139,39 @@ const createPalette = (palette: PaletteOptions = {}): Palette => {
   const disabled =
     mode === PALETTE_MODE.DARK
       ? {
-          main: dark.action.disabledBackground,
-          contrastText: dark.action.disabled,
+          main: darkTheme.palette.action.disabledBackground,
+          contrastText: darkTheme.palette.action.disabled,
         }
       : {
-          main: light.action.disabledBackground,
-          contrastText: light.action.disabled,
+          main: lightTheme.palette.action.disabledBackground,
+          contrastText: lightTheme.palette.action.disabled,
         }
+
+  const defaultMainColor =
+    mode === PALETTE_MODE.DARK ? colors.common.white : colors.common.black
+
+  /**
+   * ToDo: Change `textt` to something else, `text` is conflicting with `CommonVariants.text`, both are same keys.
+   *  may be better move all `CommonVariants` to variants-props.
+   */
+  const textt =
+    mode === PALETTE_MODE.DARK
+      ? darkTheme.palette.text
+      : lightTheme.palette.text
 
   const paletteOutput = {
     // A collection of common colors.
     common: colors.common,
-    // The palette mode, can be light or dark.
+    // The palette mode, can be light or darkTheme.
     mode,
     // The colors used to represent primary interface elements for a user.
     default: getDefaultColorStates(colors.grey),
     primary: getColorStates(primary),
     secondary: getColorStates(secondary),
     error: getColorStates(error),
+    warning: getColorStates(warning),
     info: getColorStates(info),
     success: getColorStates(success),
-    warning: getColorStates(warning),
     disabled,
     // ToDo: CommonVariants.contained is required ?
     [CommonVariants.contained]: {
@@ -249,7 +184,7 @@ const createPalette = (palette: PaletteOptions = {}): Palette => {
       warning: getColorStates(warning),
     },
     [CommonVariants.outlined]: {
-      default: getDefaultColorStatesForOutlined('#000000'),
+      default: getDefaultColorStatesForOutlined(defaultMainColor),
       primary: getColorStatesForOutlined(primary),
       secondary: getColorStatesForOutlined(secondary),
       error: getColorStatesForOutlined(error),
@@ -258,7 +193,7 @@ const createPalette = (palette: PaletteOptions = {}): Palette => {
       warning: getColorStatesForOutlined(warning),
     },
     [CommonVariants.text]: {
-      default: getDefaultColorStatesForText('#000000'),
+      default: getDefaultColorStatesForText(defaultMainColor),
       primary: getColorStatesForText(primary),
       secondary: getColorStatesForText(secondary),
       error: getColorStatesForText(error),
@@ -266,6 +201,8 @@ const createPalette = (palette: PaletteOptions = {}): Palette => {
       success: getColorStatesForText(success),
       warning: getColorStatesForText(warning),
     },
+    grey: colors.grey,
+    textt,
   }
 
   return paletteOutput

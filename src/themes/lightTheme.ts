@@ -1,7 +1,14 @@
+import colors from './colors'
+
 /**
+ * `lightTheme` props are from mui-v4, not from mui-v5.
+ *
  * Reference links
+ *  https://v4.mui.com/components
  *  https://next.material-ui.com/customization/default-theme/
  *  https://material.io/design/color/dark-theme.html#custom-application
+ *
+ * ToDo: Add `type` for `lightTheme`
  */
 const lightTheme = {
   breakpoints: {
@@ -9,83 +16,78 @@ const lightTheme = {
     values: {
       xs: 0,
       sm: 600,
-      md: 900,
-      lg: 1200,
-      xl: 1536,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
     },
-    unit: 'px',
   },
   direction: 'ltr',
-  components: {},
-  palette: {
-    mode: 'light',
-    common: {
-      black: '#000',
-      white: '#fff',
+  mixins: {
+    toolbar: {
+      minHeight: 56,
+      '@media (min-width:0px) and (orientation: landscape)': {
+        minHeight: 48,
+      },
+      '@media (min-width:600px)': {
+        minHeight: 64,
+      },
     },
+  },
+  overrides: {},
+  palette: {
+    common: colors.common,
+    type: 'light',
     primary: {
       main: '#1976d2',
-      light: '#42a5f5',
-      dark: '#1565c0',
+      light: 'rgb(71, 145, 219)',
+      dark: 'rgb(17, 82, 147)',
       contrastText: '#fff',
     },
     secondary: {
-      main: '#9c27b0',
-      light: '#ba68c8',
-      dark: '#7b1fa2',
+      main: 'rgb(220, 0, 78)',
+      light: 'rgb(227, 51, 113)',
+      dark: 'rgb(154, 0, 54)',
       contrastText: '#fff',
     },
     error: {
-      main: '#d32f2f',
-      light: '#ef5350',
-      dark: '#c62828',
+      light: '#e57373',
+      main: '#f44336',
+      dark: '#d32f2f',
       contrastText: '#fff',
     },
     warning: {
-      main: '#ED6C02',
-      light: '#ff9800',
-      dark: '#e65100',
-      contrastText: '#fff',
+      light: '#ffb74d',
+      main: '#ff9800',
+      dark: '#f57c00',
+      contrastText: 'rgba(0, 0, 0, 0.87)',
     },
     info: {
-      main: '#0288d1',
-      light: '#03a9f4',
-      dark: '#01579b',
+      light: '#64b5f6',
+      main: '#2196f3',
+      dark: '#1976d2',
       contrastText: '#fff',
     },
     success: {
-      main: '#2e7d32',
-      light: '#4caf50',
-      dark: '#1b5e20',
-      contrastText: '#fff',
+      light: '#81c784',
+      main: '#4caf50',
+      dark: '#388e3c',
+      contrastText: 'rgba(0, 0, 0, 0.87)',
     },
-    grey: {
-      '50': '#fafafa',
-      '100': '#f5f5f5',
-      '200': '#eeeeee',
-      '300': '#e0e0e0',
-      '400': '#bdbdbd',
-      '500': '#9e9e9e',
-      '600': '#757575',
-      '700': '#616161',
-      '800': '#424242',
-      '900': '#212121',
-      A100: '#f5f5f5',
-      A200: '#eeeeee',
-      A400: '#bdbdbd',
-      A700: '#616161',
-    },
+    grey: colors.grey,
     contrastThreshold: 3,
     tonalOffset: 0.2,
     text: {
       primary: 'rgba(0, 0, 0, 0.87)',
-      secondary: 'rgba(0, 0, 0, 0.6)',
+      secondary: 'rgba(0, 0, 0, 0.54)',
       disabled: 'rgba(0, 0, 0, 0.38)',
+      hint: 'rgba(0, 0, 0, 0.38)',
     },
     divider: 'rgba(0, 0, 0, 0.12)',
     background: {
       paper: '#fff',
       default: '#fff',
+      level2: '#f5f5f5',
+      level1: '#fff',
     },
     action: {
       active: 'rgba(0, 0, 0, 0.54)',
@@ -101,18 +103,9 @@ const lightTheme = {
       activatedOpacity: 0.12,
     },
   },
-  shape: {
-    borderRadius: 4,
-  },
-  mixins: {
-    toolbar: {
-      minHeight: 56,
-      '@media (min-width:0px) and (orientation: landscape)': {
-        minHeight: 48,
-      },
-      '@media (min-width:600px)': {
-        minHeight: 64,
-      },
+  props: {
+    MuiBadge: {
+      overlap: 'rectangular',
     },
   },
   shadows: [
@@ -244,6 +237,9 @@ const lightTheme = {
       textTransform: 'uppercase',
     },
   },
+  shape: {
+    borderRadius: 4,
+  },
   transitions: {
     easing: {
       easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
@@ -269,6 +265,9 @@ const lightTheme = {
     modal: 1300,
     snackbar: 1400,
     tooltip: 1500,
+  },
+  nprogress: {
+    color: '#000',
   },
 }
 

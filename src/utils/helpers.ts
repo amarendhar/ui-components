@@ -1,7 +1,7 @@
 import { css } from 'styled-components'
 import get from 'lodash/get'
 import { CreateClassName, StyleObj } from 'types'
-import { mediaQuery } from 'themes/default'
+import { mediaQuery } from 'themes/defaultTheme'
 
 // ToDo: remove type any
 export const typeOf = (value: any, type: string): boolean =>

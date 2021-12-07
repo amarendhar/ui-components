@@ -148,7 +148,7 @@ describe('createPalette', () => {
     },
     outlined: {
       default: {
-        main: '#000000',
+        main: '#000',
         light: 'rgba(0, 0, 0, 0.04)',
         dark: 'rgba(0, 0, 0, 0.28)',
         contrastText: 'rgba(0, 0, 0, 0.23)',
@@ -192,7 +192,7 @@ describe('createPalette', () => {
     },
     text: {
       default: {
-        main: '#000000',
+        main: '#000',
         light: 'rgba(0, 0, 0, 0.04)',
         dark: 'rgba(0, 0, 0, 0.28)',
         contrastText: 'rgba(0, 0, 0, 0.23)',
@@ -233,6 +233,28 @@ describe('createPalette', () => {
         dark: 'rgba(237, 108, 2, 0.32)',
         contrastText: 'rgba(237, 108, 2, 0.5)',
       },
+    },
+    textt: {
+      disabled: 'rgba(0, 0, 0, 0.38)',
+      hint: 'rgba(0, 0, 0, 0.38)',
+      primary: 'rgba(0, 0, 0, 0.87)',
+      secondary: 'rgba(0, 0, 0, 0.54)',
+    },
+    grey: {
+      '100': '#f5f5f5',
+      '200': '#eeeeee',
+      '300': '#e0e0e0',
+      '400': '#bdbdbd',
+      '50': '#fafafa',
+      '500': '#9e9e9e',
+      '600': '#757575',
+      '700': '#616161',
+      '800': '#424242',
+      '900': '#212121',
+      A100: '#d5d5d5',
+      A200: '#aaaaaa',
+      A400: '#303030',
+      A700: '#616161',
     },
   }
 
@@ -330,10 +352,10 @@ describe('createPalette', () => {
     },
     outlined: {
       default: {
-        main: '#000000',
-        light: 'rgba(0, 0, 0, 0.04)',
-        dark: 'rgba(0, 0, 0, 0.28)',
-        contrastText: 'rgba(0, 0, 0, 0.23)',
+        main: '#fff',
+        light: 'rgba(255, 255, 255, 0.04)',
+        dark: 'rgba(255, 255, 255, 0.28)',
+        contrastText: 'rgba(255, 255, 255, 0.23)',
       },
       primary: {
         main: '#90caf9',
@@ -374,10 +396,10 @@ describe('createPalette', () => {
     },
     text: {
       default: {
-        main: '#000000',
-        light: 'rgba(0, 0, 0, 0.04)',
-        dark: 'rgba(0, 0, 0, 0.28)',
-        contrastText: 'rgba(0, 0, 0, 0.23)',
+        main: '#fff',
+        light: 'rgba(255, 255, 255, 0.04)',
+        dark: 'rgba(255, 255, 255, 0.28)',
+        contrastText: 'rgba(255, 255, 255, 0.23)',
       },
       primary: {
         main: '#90caf9',
@@ -415,6 +437,29 @@ describe('createPalette', () => {
         dark: 'rgba(255, 167, 38, 0.32)',
         contrastText: 'rgba(255, 167, 38, 0.5)',
       },
+    },
+    textt: {
+      disabled: 'rgba(255, 255, 255, 0.5)',
+      hint: 'rgba(255, 255, 255, 0.5)',
+      icon: 'rgba(255, 255, 255, 0.5)',
+      primary: '#fff',
+      secondary: 'rgba(255, 255, 255, 0.7)',
+    },
+    grey: {
+      '100': '#f5f5f5',
+      '200': '#eeeeee',
+      '300': '#e0e0e0',
+      '400': '#bdbdbd',
+      '50': '#fafafa',
+      '500': '#9e9e9e',
+      '600': '#757575',
+      '700': '#616161',
+      '800': '#424242',
+      '900': '#212121',
+      A100: '#d5d5d5',
+      A200: '#aaaaaa',
+      A400: '#303030',
+      A700: '#616161',
     },
   }
 
@@ -512,7 +557,7 @@ describe('createPalette', () => {
     },
     outlined: {
       default: {
-        main: '#000000',
+        main: '#000',
         light: 'rgba(0, 0, 0, 0.04)',
         dark: 'rgba(0, 0, 0, 0.28)',
         contrastText: 'rgba(0, 0, 0, 0.23)',
@@ -556,7 +601,7 @@ describe('createPalette', () => {
     },
     text: {
       default: {
-        main: '#000000',
+        main: '#000',
         light: 'rgba(0, 0, 0, 0.04)',
         dark: 'rgba(0, 0, 0, 0.28)',
         contrastText: 'rgba(0, 0, 0, 0.23)',
@@ -597,6 +642,28 @@ describe('createPalette', () => {
         dark: 'rgba(237, 108, 2, 0.32)',
         contrastText: 'rgba(237, 108, 2, 0.5)',
       },
+    },
+    textt: {
+      disabled: 'rgba(0, 0, 0, 0.38)',
+      hint: 'rgba(0, 0, 0, 0.38)',
+      primary: 'rgba(0, 0, 0, 0.87)',
+      secondary: 'rgba(0, 0, 0, 0.54)',
+    },
+    grey: {
+      '100': '#f5f5f5',
+      '200': '#eeeeee',
+      '300': '#e0e0e0',
+      '400': '#bdbdbd',
+      '50': '#fafafa',
+      '500': '#9e9e9e',
+      '600': '#757575',
+      '700': '#616161',
+      '800': '#424242',
+      '900': '#212121',
+      A100: '#d5d5d5',
+      A200: '#aaaaaa',
+      A400: '#303030',
+      A700: '#616161',
     },
   }
 })

@@ -3,7 +3,12 @@ import styled from 'styled-components'
 import { Focus } from 'styles'
 import { createClassName } from 'utils/helpers'
 import { getStyles } from 'themes/themeUtils'
-import { CommonColors, CommonSizes, CommonVariants } from 'themes/themTypes'
+import {
+  CommonColors,
+  CommonSizes,
+  CommonVariants,
+  PALETTE_MODE,
+} from 'themes/themTypes'
 
 type SwitchBoxProps = {
   color?: CommonColors
@@ -145,10 +150,15 @@ const switchTrackVariants = getStyles<SwitchTrackProps>((props) => {
   }
 })
 
+/**
+ * Note: `CheckTrack` `hover/active/disabled` css works only on hover/active/disabled of `CheckThumb` if `z-index: 1` is not provided for `CheckTrack`.
+ */
 const SwitchTrack = styled.span<SwitchTrackProps>`
   display: flex;
   align-items: center;
+
   border-radius: 34px;
+  z-index: 1;
 
   transition: background-color 0.4s, border 0.4s;
 
@@ -199,7 +209,13 @@ const switchThumbVariants = getStyles<SwitchThumbProps>(({ checked }) => {
 })
 
 const SwitchThumb = styled.span<SwitchThumbProps>`
+  box-sizing: border-box;
   border-radius: 50%;
+  border: 1px solid
+    ${({ theme, checked }) =>
+      theme.palette.mode === PALETTE_MODE.DARK
+        ? theme.palette.grey[500]
+        : theme.palette.common.white};
 
   background-color: white;
 

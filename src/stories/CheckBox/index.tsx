@@ -101,7 +101,12 @@ const CheckBox = ({
           disabled: disabled,
         })}
       >
-        <CheckThumb size={size} checked={checked} />
+        <CheckThumb
+          color={color}
+          variant={variant}
+          size={size}
+          checked={checked}
+        />
       </CheckTrack>
       {children && <Label disabled={disabled}>{children}</Label>}
     </Container>
@@ -176,12 +181,16 @@ const checkTrackVariants = getStyles<CheckTrackProps>((props) => {
   }
 })
 
+/**
+ * Note: `CheckTrack` `hover/active/disabled` css works only on hover/active/disabled of `CheckThumb` if `z-index: 1` is not provided for `CheckTrack`.
+ */
 const CheckTrack = styled.span<CheckTrackProps>`
   display: flex;
   align-items: center;
   justify-content: center;
 
   border-radius: 3px;
+  z-index: 1;
 
   transition: background-color 0.4s, border 0.4s;
 
@@ -205,11 +214,20 @@ const Input = styled.input`
 `
 
 type CheckThumbProps = {
+  color: CommonColors
+  variant: CommonVariants
   size: CommonSizes
   checked: boolean
 }
 
-const checkThumbVariants = getStyles<CheckThumbProps>(({ checked }) => {
+const checkThumbVariants = getStyles<CheckThumbProps>((props) => {
+  const {
+    theme: { palette },
+    color,
+    variant,
+  } = props
+  const { contrastText } = palette[variant][color]
+
   return {
     size: {
       sm: {
@@ -228,12 +246,17 @@ const checkThumbVariants = getStyles<CheckThumbProps>(({ checked }) => {
         marginTop: -4,
       },
     },
+    variant: {
+      [CommonVariants.contained]: {
+        borderColor: contrastText,
+      },
+    },
   }
 })
 
 const CheckThumb = styled.span<CheckThumbProps>`
-  border-bottom: 2px solid ${({ theme }) => theme.palette.common.white};
-  border-right: 2px solid ${({ theme }) => theme.palette.common.white};
+  border-bottom: 2px solid;
+  border-right: 2px solid;
 
   opacity: ${({ checked }) => (checked ? 1 : 0)};
 

@@ -2,8 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Docs
-[Docs](https://amarendhar.github.io/ui-components/)
+## Docs / Preview link
+[https://amarendhar.github.io/ui-components/](https://amarendhar.github.io/ui-components/)
 
 ## Available Scripts
 
@@ -22,38 +22,24 @@ You will also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+### `yarn build-storybook`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `docs` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for sm and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
 ## UX/UI reference links
   - https://bareynol.github.io/mui-theme-creator
+  - https://v4.mui.com/components
   - https://next.material-ui.com/customization/color/
   - https://material.io/resources/color (check both tabs 'USER INTERFACES & ACCESSIBILITY')
   - https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast
   - https://next.material-ui.com/system/palette/
+
+## Deploy github-pages
+  - https://dev.to/kouts/deploy-storybook-to-github-pages-3bij
 
 ## Large vs Normal Text
 * Large text is defined as 14 point (typically 18.66px) and bold or larger, or 18 point (typically 24px) or larger. Normal text is below 18 point or below 14 point and bold.
@@ -62,3 +48,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
   - https://bharathvaj.me/blog/focus-vs-within-vs-visible
   - https://matthiasott.com/notes/focus-visible-is-here
 
+
+## Notes
+  - Themes light/dark are from [mui-v4](https://v4.mui.com/components), but not from [mui-v5](https://mui.com/components/buttons/)

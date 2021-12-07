@@ -247,14 +247,14 @@ const Bar = styled.span<BarProps>`
 
   width: 100%;
   height: 2px;
-  
+
   border-radius: ${({ theme }) => theme.radii.md}px;
 
   transition: all 300ms;
 
   &:nth-child(1) {
     top: ${({ isOpen }) => (isOpen ? 'calc(50% - 1px)' : 'calc(20% - 1px)')};
-    transform: ${({ isOpen }) => (isOpen ? 'rotate(-36deg)' : 'none')};
+    transform: ${({ isOpen }) => (isOpen ? 'rotate(-36deg)' : 'rotate(0deg)')};
   }
 
   &:nth-child(2) {
@@ -265,7 +265,7 @@ const Bar = styled.span<BarProps>`
 
   &:nth-child(3) {
     top: ${({ isOpen }) => (isOpen ? 'calc(50% - 1px)' : 'calc(80% - 1px)')};
-    transform: ${({ isOpen }) => (isOpen ? 'rotate(36deg)' : 'none')};
+    transform: ${({ isOpen }) => (isOpen ? 'rotate(36deg)' : 'rotate(0deg)')};
   }
 
   ${barVariants};
