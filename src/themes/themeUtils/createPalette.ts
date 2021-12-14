@@ -51,7 +51,7 @@ const getContrastText = (background: string) => {
 /**
  * Refer `augmentColor` method from @material-ui/core/styles/createPalette.js
  */
-const getColorStates = (color: string): PaletteColor => {
+export const getColorStates = (color: string): PaletteColor => {
   // Note: Do not use common variable like below, it's not giving correct 'dark' value, when used common variable like that.
   // const decomposedColor = decomposeColor(color)
 

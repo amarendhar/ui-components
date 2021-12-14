@@ -30,7 +30,7 @@ const Button = ({
       color={color}
       variant={variant}
       size={size}
-      data-testid={restProps['data-testid']}
+      data-testid={restProps['data-testid'] || 'button'}
       className={className}
       onClick={onClick}
       disabled={disabled}
@@ -167,7 +167,7 @@ const ButtonContainer = styled.button<ButtonContainerProps>`
     ${Focus}
   }
 
-  ${buttonContainerVariants}
+  ${buttonContainerVariants};
 `
 
 const Label = styled.span``

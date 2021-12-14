@@ -4,6 +4,7 @@ import { Flex } from 'rebass'
 import { Theme } from './index'
 import lightTheme from '../../themes/lightTheme'
 import darkTheme from '../../themes/darkTheme'
+import defaultTheme from 'themes/defaultTheme'
 
 export default {
   title: 'Themes',
@@ -35,4 +36,9 @@ Light.args = {
 export const Dark = Template.bind({})
 Dark.args = {
   theme: darkTheme,
+}
+
+export const DefaultTheme = Template.bind({})
+DefaultTheme.args = {
+  theme: defaultTheme,
 }

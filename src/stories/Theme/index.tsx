@@ -1,6 +1,6 @@
 import React from 'react'
-// import React, { useRef } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+import kebabCase from 'lodash/kebabCase'
 import { isArray, isObject } from 'utils/helpers'
 
 type ThemeProps = {
@@ -13,7 +13,7 @@ export const Theme = ({ className = '', theme, ...restProps }: ThemeProps) => {
   // const counter = useRef(0)
 
   const getComponents = (key: any, value: any) => {
-    if (value?.[0] === '#' || (value?.indexOf && value?.indexOf('rgb') === 0)) {
+    if (value?.[0] === '#' || value?.indexOf?.('rgb') === 0) {
       return (
         <Color color={value}>
           <div />
@@ -22,7 +22,7 @@ export const Theme = ({ className = '', theme, ...restProps }: ThemeProps) => {
       )
     }
 
-    if (value?.includes && value?.includes('px rgb')) {
+    if (value?.includes?.('px rgb')) {
       return (
         <BoxShadow boxShadow={value}>
           <span>{value}</span>
@@ -38,7 +38,7 @@ export const Theme = ({ className = '', theme, ...restProps }: ThemeProps) => {
       )
     }
 
-    if (key?.includes && key?.includes('fontSizes')) {
+    if (key?.includes?.('fontSizes')) {
       return (
         <FontSize
           fontSize={
@@ -58,11 +58,22 @@ export const Theme = ({ className = '', theme, ...restProps }: ThemeProps) => {
       )
     }
 
-    if (key?.includes && key?.includes('fontWeight')) {
+    if (key?.includes?.('fontWeight')) {
       return (
         <FontWeight fontWeight={value}>
           <span>{value}</span>
         </FontWeight>
+      )
+    }
+
+    if (value?.includes?.('cubic-bezier')) {
+      return (
+        <Transitions
+          animationTimingFunction={kebabCase(key)}
+          transitionTimingFunction={value}
+        >
+          <span>{value}</span>
+        </Transitions>
       )
     }
 
@@ -74,25 +85,19 @@ export const Theme = ({ className = '', theme, ...restProps }: ThemeProps) => {
       const value = obj[key]
       const isIterable = isArray(value) || isObject(value)
 
-      // counter.current += 1
-      // const counterValue = counter.current
-      // if (!isIterable) {
-      //   counter.current = 0
-      // }
-      // console.log('counter.current -> ', counter.current)
-
       return (
         <Container
           key={key}
           data-testid={key}
           style={!isIterable ? { display: 'flex', alignItems: 'center' } : {}}
         >
-          {key && <div style={{ fontWeight: 'bold' }}>{key}</div>}
-          {!isIterable && (
-            <div style={{ fontWeight: 'bold', marginRight: '5px' }}>
-              :&nbsp;
+          {key && (
+            <div style={{ color: '#1ea7fd', margin: 2 }}>
+              {key}&nbsp;:&nbsp;
             </div>
           )}
+          {/* {key && <div style={{ color: '#1ea7fd' }}>{key}</div>} */}
+          {/* {!isIterable && <div style={{ marginRight: '5px' }}>:&nbsp;</div>} */}
           <div>{isIterable ? getValues(value) : getComponents(key, value)}</div>
         </Container>
       )
@@ -124,8 +129,11 @@ const Color = styled.div<{ color: string }>`
   > div:first-child {
     width: 15px;
     height: 15px;
+
     border: 1px solid;
+    margin: 5px 0;
     margin-right: 10px;
+
     background-color: ${(props) => props.color};
   }
 `
@@ -133,7 +141,11 @@ const Color = styled.div<{ color: string }>`
 const BoxShadow = styled.div<{ boxShadow: string }>`
   display: flex;
   align-items: center;
+
+  padding: 10px;
   margin: 10px 0;
+  border-radius: 5px;
+
   box-shadow: ${(props) => props.boxShadow};
 `
 
@@ -141,8 +153,11 @@ const BorderRadius = styled.div<{ borderRadius: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 16px;
   height: 16px;
+  padding: 3px;
+
   border: 1px solid;
   border-radius: ${(props) => props.borderRadius}px;
 `
@@ -157,4 +172,25 @@ const FontFamily = styled.div<{ fontFamily: string }>`
 
 const FontWeight = styled.div<{ fontWeight: string }>`
   font-weight: ${(props) => props.fontWeight};
+`
+
+const widthAnimation = keyframes`
+  from { width: 0%}
+  to { width: 100% }
+`
+
+const Transitions = styled.div<{
+  animationTimingFunction: string
+  transitionTimingFunction: string
+}>`
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: 5px;
+
+  white-space: nowrap;
+
+  background-color: red;
+  animation: ${widthAnimation} 5s infinite;
+  animation-timing-function: ${(props) => props.animationTimingFunction};
+  transition-timing-function: ${(props) => props.transitionTimingFunction};
 `

@@ -1,7 +1,9 @@
 export type Theme = {
   space: Record<'sm' | 'md' | 'lg', number>
   fontSizes: Record<'sm' | 'md' | 'lg', number>
+  fontWeights: Record<'regular' | 'bold', number>
   radii: Record<'sm' | 'md' | 'lg', number>
+  shadows: Record<'header' | 'box', string>
   palette: Palette
   breakpoints: Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number>
   mediaQuery: Record<

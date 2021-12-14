@@ -12,7 +12,7 @@ import {
 
 type SwitchBoxProps = {
   color?: CommonColors
-  variant?: CommonVariants.contained
+  variant?: CommonVariants
   size?: CommonSizes
   'data-testid'?: string
   className?: string
@@ -23,6 +23,14 @@ type SwitchBoxProps = {
   onChange?: (checked: boolean) => void
 }
 
+/**
+ * Add below css to input element
+ * 
+    user-select: none;
+    background-color: transparent;
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+ */
 const SwitchBox = ({
   color = CommonColors.primary,
   variant = CommonVariants.contained,
@@ -48,7 +56,7 @@ const SwitchBox = ({
 
   return (
     <Container
-      data-testid={restProps['data-testid']}
+      data-testid={restProps['data-testid'] || 'switchBox'}
       className={`container ${className}`}
       disabled={disabled}
     >
@@ -162,7 +170,7 @@ const SwitchTrack = styled.span<SwitchTrackProps>`
 
   transition: background-color 0.4s, border 0.4s;
 
-  ${switchTrackVariants}
+  ${switchTrackVariants};
 `
 
 const Input = styled.input<{ checked: boolean }>`
@@ -221,7 +229,7 @@ const SwitchThumb = styled.span<SwitchThumbProps>`
 
   transition: 0.4s;
 
-  ${switchThumbVariants}
+  ${switchThumbVariants};
 `
 
 const Label = styled.span<{ disabled: boolean }>`

@@ -173,7 +173,7 @@ Example-1:  Usage example
   
   Button = styled.button<ButtonContainerProps>`
     display: flex;
-    ${buttonContainerVariants}
+    ${buttonContainerVariants};
   `
 
 --------------------------------------------------------------------------------------------
@@ -217,6 +217,6 @@ Example-2:  Usage example
 
   Switch = styled.button<SwitchProps>`
     display: flex;
-    ${switchVariants}
+    ${switchVariants};
   `
  */

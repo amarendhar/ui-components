@@ -1,16 +1,21 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { CSSObject } from 'styled-components'
 
 type ContainerProps = {
   label?: string
+  style?: CSSObject
   children: React.ReactNode
 }
 
-export const FlexContainer = ({ label = '', children }: ContainerProps) => {
+export const FlexContainer = ({
+  label = '',
+  style = {},
+  children,
+}: ContainerProps) => {
   return (
     <>
       {label && <Label>{label}</Label>}
-      <Content>{children}</Content>
+      <Content style={style}>{children}</Content>
     </>
   )
 }

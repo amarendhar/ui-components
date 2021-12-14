@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { addons } from '@storybook/addons'
+import { BrowserRouter, useHistory } from 'react-router-dom'
 import { isDark } from './utils'
 import { createTheme } from '../src/themes/themeUtils'
 import { PALETTE_MODE, Theme } from '../src/themes/themTypes'
@@ -17,6 +18,10 @@ const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     font-family: arial;
     color: ${({ theme }) => theme.palette.textt.primary};
   }
+
+  #root {
+    position: relative;
+  }
 `
 
 const channel = addons.getChannel()
@@ -29,11 +34,6 @@ const useTheme = (): { paletteMode: PALETTE_MODE } => {
 
   const setTheme = useCallback(
     (e) => {
-      console.log(
-        'e?.globals?.backgrounds?.value -> ',
-        e?.globals?.backgrounds?.value,
-        isDark(e?.globals?.backgrounds?.value)
-      )
       const mode = isDark(e?.globals?.backgrounds?.value)
         ? PALETTE_MODE.DARK
         : PALETTE_MODE.LIGHT
@@ -46,7 +46,6 @@ const useTheme = (): { paletteMode: PALETTE_MODE } => {
     channel.on('updateGlobals', setTheme)
     return () => channel.off('updateGlobals', setTheme)
   }, [setTheme, channel])
-  // console.log('paletteMode -> ', paletteMode)
   // console.log('All available channel-event-names -> ', channel.eventNames())
 
   return {
@@ -65,7 +64,9 @@ export const decorators = [
     return (
       <ThemeProvider theme={createTheme({ paletteMode })}>
         <GlobalStyle />
-        <Story />
+        <BrowserRouter>
+          <Story />
+        </BrowserRouter>
       </ThemeProvider>
     )
   },

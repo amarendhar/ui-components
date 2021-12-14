@@ -12,10 +12,20 @@ export const fontSizes: Theme['fontSizes'] = {
   lg: 15,
 }
 
-const radii: Theme['radii'] = {
+export const fontWeights: Record<'regular' | 'bold', number> = {
+  regular: 400,
+  bold: 600,
+}
+
+export const radii: Theme['radii'] = {
   sm: 3,
   md: 6,
   lg: 10,
+}
+
+const shadows: Record<'header' | 'box', string> = {
+  header: '-5px 5px 5px -5px rgb(0 0 0)',
+  box: '0px 3px 5px 0px rgb(0 0 0 / 20%)',
 }
 
 // ToDo: Remove this, this is old code
@@ -73,7 +83,9 @@ export const mediaQuery: Theme['mediaQuery'] = {
 const defaultTheme: Omit<Theme, 'palette'> = {
   space,
   fontSizes,
+  fontWeights,
   radii,
+  shadows,
   /**
    * Do not include custom-breakpoints like below, when using styled-system library
    *  to avoid conflicts against breakpoints from styled-system npm,

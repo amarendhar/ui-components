@@ -7,7 +7,7 @@ import { CommonColors, CommonSizes, CommonVariants } from 'themes/themTypes'
 
 type CheckBoxProps = {
   color?: CommonColors
-  variant?: CommonVariants.contained
+  variant?: CommonVariants
   size?: CommonSizes
   'data-testid'?: string
   className?: string
@@ -76,7 +76,7 @@ const CheckBox = ({
 
   return (
     <Container
-      data-testid={restProps['data-testid']}
+      data-testid={restProps['data-testid'] || 'checkBox'}
       className={`container ${className}`}
       disabled={disabled}
     >
@@ -194,7 +194,7 @@ const CheckTrack = styled.span<CheckTrackProps>`
 
   transition: background-color 0.4s, border 0.4s;
 
-  ${checkTrackVariants}
+  ${checkTrackVariants};
 `
 
 const Input = styled.input`
@@ -263,7 +263,7 @@ const CheckThumb = styled.span<CheckThumbProps>`
   transform: rotate(40deg);
   transition: 0.2s;
 
-  ${checkThumbVariants}
+  ${checkThumbVariants};
 `
 
 const Label = styled.span<{ disabled: boolean }>`
